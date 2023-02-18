@@ -5,7 +5,8 @@ const logger = require('morgan')
 const router = express.Router()
 const cors = require('cors')
 
-const authRouter = require('./routes/Auth/index')
+const authRouter = require('./routes/Auth/auth')
+const walletRouter = require('./routes/Wallet/wallet')
 
 const app = express()
 
@@ -18,6 +19,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // Auth
 router.use('/auth', authRouter)
+
+// Wallet
+router.use('/wallet', walletRouter)
 
 app.use('/api', router)
 
