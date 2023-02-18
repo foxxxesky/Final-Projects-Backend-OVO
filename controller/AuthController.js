@@ -89,3 +89,39 @@ exports.user = async (req, res) => {
     res.status(400).json({ message: 'Unauthorized request, a token is required for authentication!' })
   }
 }
+
+exports.edit = async (req, res) => {
+  const id = req.params.id
+
+  const user = await User.findOne({
+    where: { id },
+    attributes: ['id', 'name', 'phone', 'email', 'photo']
+  })
+
+  if (!user) {
+    return res.status(400).json({ message: 'User not found!' })
+  }
+
+  try {
+    const schema = {
+      name: 'string|optional|min:3',
+      phone: 'string|optional|min:10|unique',
+      email: 'string|email|optional|unique',
+      photo: 'string|optional'
+    }
+
+    const validate = v.validate(req.body, schema)
+
+    if (validate.length) {
+      return res.status(400).json(validate)
+    }
+
+    await user.update(req.body)
+    res.status(200).json({
+      message: 'Data successfuly updated!',
+      user
+    })
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}
