@@ -86,6 +86,6 @@ exports.user = async (req, res) => {
       })
     }
   } else {
-    res.status(400).json({ message: 'Unauthorized request, a token is required for authentication' })
+    res.status(400).json({ message: 'Unauthorized request, a token is required for authentication!' })
   }
 }
