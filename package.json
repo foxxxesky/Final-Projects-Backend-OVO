@@ -1,0 +1,34 @@
+{
+  "name": "final-projects-backend-ovo",
+  "version": "18.14.1",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon ./bin/www",
+    "migrate": "npx sequelize db:migrate",
+    "seed": "npx sequelize db:seed:all",
+    "undo": "npx sequelize db:migrate:undo:all"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "fastest-validator": "^1.16.0",
+    "jsonwebtoken": "^9.0.0",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.20",
+    "sequelize": "^6.28.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "eslint": "^8.34.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "typescript": "^4.9.5"
+  }
+}
