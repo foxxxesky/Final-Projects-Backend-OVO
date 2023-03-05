@@ -3,19 +3,19 @@ const {
   Model
 } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  class WalletWitrdrawals extends Model {
+  class WalletWithdrawals extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate (models) {
-      WalletWitrdrawals.belongsTo(models.User, { foreignKey: 'user_id', as: 'user_witdrawals' })
-      WalletWitrdrawals.belongsTo(models.Wallet, { foreignKey: 'wallet_id', as: 'wallet_transaction' })
-      WalletWitrdrawals.belongsTo(models.TransactionMethod, { foreignKey: 'withdrawal_destination_id', as: 'witdrawals_method' })
+      WalletWithdrawals.belongsTo(models.User, { foreignKey: 'user_id', as: 'user_witdrawals' })
+      WalletWithdrawals.belongsTo(models.Wallet, { foreignKey: 'wallet_id', as: 'wallet_transaction' })
+      WalletWithdrawals.belongsTo(models.TransactionMethod, { foreignKey: 'withdrawal_destination_id', as: 'withdrawals_method' })
     }
   }
-  WalletWitrdrawals.init({
+  WalletWithdrawals.init({
     user_id: DataTypes.UUID,
     wallet_id: DataTypes.UUID,
     withdrawal_destination_id: DataTypes.UUID,
@@ -24,8 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.ENUM('pending', 'done', 'failed')
   }, {
     sequelize,
-    modelName: 'WalletWitrdrawals',
+    modelName: 'WalletWithdrawals',
     tableName: 'wallet_withdrawals'
   })
-  return WalletWitrdrawals
+  return WalletWithdrawals
 }

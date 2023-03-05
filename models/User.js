@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate (models) {
       User.hasMany(models.Wallet, { foreignKey: 'id', as: 'user_wallet' })
       User.hasMany(models.WalletTransaction, { foreignKey: 'id', as: 'user_transaction' })
-      User.hasMany(models.WalletWitdrawals, { foreignKey: 'id', as: 'user_witdrawals' })
+      User.hasMany(models.WalletWithdrawals, { foreignKey: 'id', as: 'user_withdrawals' })
     }
   }
   User.init({

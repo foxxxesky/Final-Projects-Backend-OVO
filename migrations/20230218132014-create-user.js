@@ -14,7 +14,8 @@ module.exports = {
       },
       phone: {
         type: Sequelize.STRING,
-        unique: true
+        unique: true,
+        allowNull: false
       },
       email: {
         type: Sequelize.STRING,
@@ -30,11 +31,13 @@ module.exports = {
       },
       email_verified: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
+        allowNull: false
       },
       phone_verified: {
         type: Sequelize.BOOLEAN,
-        defaultValue: false
+        defaultValue: false,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
