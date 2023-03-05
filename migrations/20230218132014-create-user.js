@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.UUID
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       phone: {
         type: Sequelize.STRING,
@@ -17,10 +18,12 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        unique: true
+        unique: true,
+        allowNull: false
       },
       security_code: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       photo: {
         type: Sequelize.STRING

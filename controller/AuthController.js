@@ -1,15 +1,19 @@
-const { User } = require('../models')
 const Validator = require('fastest-validator')
+const { User } = require('../models')
 const { ACCESS_TOKEN } = process.env
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 const uuid = require('uuid')
 const v = new Validator()
 
 exports.login = async (req, res) => {
-  const phone = req.body.phone
+  const { name, email, phone, security_code: securityCode } = req.body
 
   const schema = {
-    phone: 'string|unique|min:10'
+    phone: 'string|unique|min:10',
+    name: 'string|min:3|optional',
+    email: 'email|optional',
+    security_code: 'number|min:6'
   }
 
   const validate = v.validate(req.body, schema)
@@ -18,41 +22,45 @@ exports.login = async (req, res) => {
     return res.status(400).json(validate)
   }
 
-  const userData = await User.findOne({ where: { phone } })
+  const salt = bcrypt.genSaltSync(10)
+  const hash = bcrypt.hashSync(String(securityCode), salt)
 
-  if (!userData) {
-    req.body.id = uuid.v4()
+  const [user, created] = await User.findOrCreate({
+    where: { phone },
+    attributes: ['id', 'name', 'phone', 'email', 'photo', 'email_verified', 'phone_verified', 'security_code'],
+    defaults: {
+      id: uuid.v4(),
+      name,
+      email,
+      security_code: hash
+    }
+  })
 
+  if (created) {
     const accessToken = jwt.sign({
-      user: { phone }
+      user: { phone, email }
     }, ACCESS_TOKEN, { expiresIn: '6h' })
-
-    await User.create(req.body)
-
-    const activeUser = await User.findOne({
-      where: { phone },
-      attributes: ['id', 'name', 'phone', 'email', 'photo', 'security_code']
-    })
 
     res.status(200).json({
       message: 'Register Success!',
       access_token: accessToken,
-      user: activeUser
+      data: user
     })
   } else {
-    const accessToken = jwt.sign({
-      user: { phone: userData.phone }
-    }, ACCESS_TOKEN, { expiresIn: '6h' })
+    const checkPass = bcrypt.compareSync(String(securityCode), user.security_code)
 
-    const activeUser = await User.findOne({
-      where: { phone: userData.phone },
-      attributes: ['id', 'name', 'phone', 'email', 'photo']
-    })
+    if (!checkPass) {
+      return res.status(400).json({ message: 'Login failed!' })
+    }
+
+    const accessToken = jwt.sign({
+      user: { phone, email }
+    }, ACCESS_TOKEN, { expiresIn: '6h' })
 
     res.status(200).json({
       message: 'Login Success!',
       access_token: accessToken,
-      user: activeUser
+      data: user
     })
   }
 }
@@ -71,7 +79,7 @@ exports.user = async (req, res) => {
       const phone = decode.user.phone
       const user = await User.findOne({
         where: { phone },
-        attributes: ['id', 'name', 'phone', 'email', 'photo']
+        attributes: ['id', 'name', 'phone', 'email', 'photo', 'email_verified', 'phone_verified']
       })
 
       if (user != null) {
