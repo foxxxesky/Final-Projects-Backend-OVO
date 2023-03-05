@@ -25,6 +25,14 @@ module.exports = {
       photo: {
         type: Sequelize.STRING
       },
+      email_verified: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      phone_verified: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
