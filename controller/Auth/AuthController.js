@@ -1,5 +1,5 @@
 const Validator = require('fastest-validator')
-const { User } = require('../models')
+const { User } = require('../../models')
 const { ACCESS_TOKEN } = process.env
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')

@@ -1,5 +1,5 @@
 const Validator = require('fastest-validator')
-const { Wallet } = require('../models')
+const { Wallet } = require('../../models')
 const uuid = require('uuid')
 const v = new Validator()
 

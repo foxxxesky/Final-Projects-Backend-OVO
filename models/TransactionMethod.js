@@ -16,7 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   TransactionMethod.init({
     method_name: DataTypes.STRING,
-    instruction: DataTypes.TEXT
+    icon: DataTypes.STRING,
+    instruction: DataTypes.TEXT,
+    category: DataTypes.STRING,
+    status: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'TransactionMethod',

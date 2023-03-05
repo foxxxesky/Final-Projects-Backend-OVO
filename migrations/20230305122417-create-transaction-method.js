@@ -12,8 +12,20 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      icon: {
+        type: Sequelize.STRING,
+        defaultValue: null
+      },
       instruction: {
         type: Sequelize.TEXT,
+        allowNull: false
+      },
+      category: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      status: {
+        type: Sequelize.BOOLEAN,
         allowNull: false
       },
       createdAt: {
