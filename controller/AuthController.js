@@ -7,8 +7,6 @@ const uuid = require('uuid')
 const v = new Validator()
 
 exports.login = async (req, res) => {
-  const { name, email, phone, security_code: securityCode } = req.body
-
   const schema = {
     phone: 'string|unique|min:10',
     name: 'string|min:3|optional',
@@ -17,6 +15,7 @@ exports.login = async (req, res) => {
   }
 
   const validate = v.validate(req.body, schema)
+  const { name, email, phone, security_code: securityCode } = req.body
 
   if (validate.length) {
     return res.status(400).json(validate)

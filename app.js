@@ -6,7 +6,7 @@ const router = express.Router()
 const cors = require('cors')
 
 const authRouter = require('./routes/Auth/auth')
-const promotionRouter = require('./routes/Promotion/promotion')
+const walletRouter = require('./routes/Wallet/wallet')
 
 const app = express()
 
@@ -20,8 +20,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 // Auth
 router.use('/auth', authRouter)
 
-// Promotion
-router.use('/promotion', promotionRouter)
+// wallet
+router.use('/wallet', walletRouter)
 
 app.use('/api', router)
 
