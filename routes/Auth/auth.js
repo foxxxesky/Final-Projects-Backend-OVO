@@ -3,8 +3,8 @@ const { login, user, edit } = require('../../controller/Auth/AuthController')
 const Auth = require('../../middleware/Auth')
 const router = express.Router()
 
-router.post('/login', login)
+router.post('/user/login', login)
 router.get('/user', Auth, user)
-router.put('/edit/:id', Auth, edit)
+router.put('/user/:id', Auth, edit)
 
 module.exports = router

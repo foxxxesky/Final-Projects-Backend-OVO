@@ -19,13 +19,13 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Auth
-router.use('/auth', authRouter)
+router.use(authRouter)
 
 // Wallet
-router.use('/wallet', walletRouter)
+router.use(walletRouter)
 
 // Transaction
-router.use('/transaction', transactionRouter)
+router.use(transactionRouter)
 
 app.use('/api', router)
 
