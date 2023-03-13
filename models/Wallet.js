@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate (models) {
       Wallet.belongsTo(models.User, { foreignKey: 'user_id', as: 'user_wallet' })
-      Wallet.hasMany(models.WalletTransaction, { foreignKey: 'id', as: 'wallet_transaction' })
-      Wallet.hasMany(models.WalletWithdrawals, { foreignKey: 'id', as: 'wallet_withdrawal' })
+      Wallet.hasMany(models.WalletTransaction, { foreignKey: 'wallet_id', as: 'wallet_transaction' })
+      Wallet.hasMany(models.WalletWithdrawals, { foreignKey: 'transaction_method_id', as: 'wallet_withdrawal' })
     }
   }
   Wallet.init({

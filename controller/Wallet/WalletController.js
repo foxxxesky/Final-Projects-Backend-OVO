@@ -1,7 +1,34 @@
 const Validator = require('fastest-validator')
-const { Wallet } = require('../../models')
+const { Wallet, User } = require('../../models')
 const uuid = require('uuid')
 const v = new Validator()
+
+exports.show = async (req, res) => {
+  const id = req.params.id
+  const wallet = await Wallet.findOne({
+    where: { id },
+    include: [
+      {
+        model: User,
+        attributes: {
+          exclude: ['security_code', 'email_verified', 'phone_verified', 'photo', 'createdAt', 'updatedAt']
+        },
+        as: 'user_wallet'
+      }
+    ]
+  })
+
+  if (!wallet) {
+    return res.status(400).json({
+      message: 'Wallet not found!'
+    })
+  }
+
+  res.status(200).json({
+    message: 'Wallet Info',
+    data: wallet
+  })
+}
 
 exports.create = async (req, res) => {
   const schema = {
@@ -24,7 +51,16 @@ exports.create = async (req, res) => {
         id: uuid.v4(),
         user_id: userID,
         balance: 0
-      }
+      },
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ['security_code', 'email_verified', 'phone_verified', 'photo', 'createdAt', 'updatedAt']
+          },
+          as: 'user_wallet'
+        }
+      ]
     })
 
     if (created) {
@@ -48,7 +84,12 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
   const id = req.params.id
 
-  const wallet = await Wallet.findOne({ where: { id } })
+  const wallet = await Wallet.findOne({
+    where: { id },
+    attributes: {
+      exclude: ['createdAt']
+    }
+  })
 
   if (!wallet) {
     return res.status(400).json({ message: 'Wallet not found!' })
