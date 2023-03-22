@@ -38,8 +38,9 @@ exports.login = async (req, res) => {
   if (created) {
     const session = {
       id: user.id,
-      phone: user.phone,
-      email: user.email
+      name: user.name,
+      email: user.email,
+      phone: user.phone
     }
 
     const accessToken = jwt.sign({
@@ -60,8 +61,9 @@ exports.login = async (req, res) => {
 
     const session = {
       id: user.id,
-      phone: user.phone,
-      email: user.email
+      name: user.name,
+      email: user.email,
+      phone: user.phone
     }
 
     const accessToken = jwt.sign({
