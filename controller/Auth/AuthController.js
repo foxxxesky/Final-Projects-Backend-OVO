@@ -36,8 +36,14 @@ exports.login = async (req, res) => {
   })
 
   if (created) {
+    const session = {
+      id: user.id,
+      phone: user.phone,
+      email: user.email
+    }
+
     const accessToken = jwt.sign({
-      user: { phone, email }
+      user: session
     }, ACCESS_TOKEN, { expiresIn: '6h' })
 
     res.status(200).json({
@@ -52,8 +58,14 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: 'Login failed!' })
     }
 
+    const session = {
+      id: user.id,
+      phone: user.phone,
+      email: user.email
+    }
+
     const accessToken = jwt.sign({
-      user: { phone, email }
+      user: session
     }, ACCESS_TOKEN, { expiresIn: '6h' })
 
     res.status(200).json({
