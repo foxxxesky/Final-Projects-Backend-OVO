@@ -7,7 +7,6 @@ const v = new Validator()
 exports.show = async (req, res) => {
   const authHeader = req.headers.authorization
   const token = authHeader && authHeader.split(' ')[1]
-
   const decoded = jwt.verify(token, process.env.ACCESS_TOKEN)
 
   const wallet = await Wallet.findOne({
@@ -38,7 +37,6 @@ exports.show = async (req, res) => {
 exports.create = async (req, res) => {
   const authHeader = req.headers.authorization
   const token = authHeader && authHeader.split(' ')[1]
-
   const decoded = jwt.verify(token, process.env.ACCESS_TOKEN)
 
   try {

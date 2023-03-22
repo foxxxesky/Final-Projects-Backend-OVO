@@ -45,7 +45,7 @@ exports.login = async (req, res) => {
 
     const accessToken = jwt.sign({
       user: session
-    }, ACCESS_TOKEN, { expiresIn: '6h' })
+    }, ACCESS_TOKEN, { expiresIn: '48h' })
 
     res.status(200).json({
       message: 'Register Success!',
@@ -68,7 +68,7 @@ exports.login = async (req, res) => {
 
     const accessToken = jwt.sign({
       user: session
-    }, ACCESS_TOKEN, { expiresIn: '6h' })
+    }, ACCESS_TOKEN, { expiresIn: '48h' })
 
     res.status(200).json({
       message: 'Login Success!',
