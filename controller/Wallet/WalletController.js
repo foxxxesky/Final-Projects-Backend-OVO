@@ -1,5 +1,6 @@
-const Validator = require('fastest-validator')
 const { Wallet, User } = require('../../models')
+const Validator = require('fastest-validator')
+const jwt = require('jsonwebtoken')
 const uuid = require('uuid')
 const v = new Validator()
 
@@ -31,25 +32,30 @@ exports.show = async (req, res) => {
 }
 
 exports.create = async (req, res) => {
-  const schema = {
-    user_id: 'uuid',
-    balance: 'number'
-  }
+  // const schema = {
+  //   user_id: 'uuid',
+  //   balance: 'number'
+  // }
 
-  const validate = v.validate(req.body, schema)
-  const { user_id: userID } = req.body
+  // const validate = v.validate(req.body, schema)
+  // const { user_id: userID } = req.body
 
-  if (validate.length) {
-    return res.status(400).json(validate)
-  }
+  // if (validate.length) {
+  //   return res.status(400).json(validate)
+  // }
+
+  const authHeader = req.headers.authorization
+  const token = authHeader && authHeader.split(' ')[1]
+
+  const decoded = jwt.verify(token, process.env.ACCESS_TOKEN)
 
   try {
     const [wallet, created] = await Wallet.findOrCreate({
-      where: { user_id: userID },
+      where: { user_id: decoded.user.id },
       attributes: ['id', 'user_id', 'balance'],
       defaults: {
         id: uuid.v4(),
-        user_id: userID,
+        user_id: decoded.user.id,
         balance: 0
       },
       include: [
