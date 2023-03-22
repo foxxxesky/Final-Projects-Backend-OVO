@@ -12,7 +12,7 @@ const coreApi = new midtransClient.CoreApi({
 })
 
 exports.charge = async (req, res, next) => {
-  // const wallet =
+  // const wallet = Wallet.findOne
   coreApi.charge(req.body)
     .then((response) => {
       // const payload = {
