@@ -566,7 +566,7 @@
                         <mxRectangle width="199.99999999999977" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="208" value="double" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;fontFamily=Courier New;" parent="205" vertex="1">
+                <mxCell id="208" value="integer" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;fontFamily=Courier New;" parent="205" vertex="1">
                     <mxGeometry x="239.99999999999977" width="220.00000000000023" height="30" as="geometry">
                         <mxRectangle width="220.00000000000023" height="30" as="alternateBounds"/>
                     </mxGeometry>
@@ -1100,7 +1100,7 @@
                         <mxRectangle width="200" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="264" value="double" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;fontFamily=Courier New;" parent="261" vertex="1">
+                <mxCell id="264" value="integer" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;fontFamily=Courier New;" parent="261" vertex="1">
                     <mxGeometry x="240" width="240" height="30" as="geometry">
                         <mxRectangle width="240" height="30" as="alternateBounds"/>
                     </mxGeometry>
