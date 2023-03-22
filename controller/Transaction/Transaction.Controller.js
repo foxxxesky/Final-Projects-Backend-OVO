@@ -1,4 +1,4 @@
-const { WalletTransaction, Wallet } = require('../../models')
+const { WalletTransaction, Wallet, User, TransactionMethod } = require('../../models')
 const midtransClient = require('midtrans-client')
 const jwt = require('jsonwebtoken')
 const uuid = require('uuid')
@@ -8,6 +8,53 @@ const coreApi = new midtransClient.CoreApi({
   serverKey: process.env.SERVER_KEY,
   clientKey: process.env.CLIENT_KEY
 })
+
+exports.show = async (req, res) => {
+  const authHeader = req.headers.authorization
+  const token = authHeader && authHeader.split(' ')[1]
+  const decoded = jwt.verify(token, process.env.ACCESS_TOKEN)
+
+  const conditions = {}
+  if (req.query.transaction_status) {
+    conditions.transaction_status = req.query.transaction_status
+  }
+
+  if (req.query.transaction_type) {
+    conditions.transaction_type = req.query.transaction_type
+  }
+
+  const transaction = await WalletTransaction.findAll({
+    where: { user_id: decoded.user.id, ...conditions },
+    include: [
+      {
+        model: User,
+        attributes: {
+          exclude: ['security_code', 'email_verified', 'phone_verified', 'photo', 'createdAt', 'updatedAt']
+        },
+        as: 'user_transaction'
+      },
+      {
+        model: Wallet,
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        },
+        as: 'wallet_transaction'
+      },
+      {
+        model: TransactionMethod,
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        },
+        as: 'transaction_method'
+      }
+    ]
+  })
+
+  res.status(200).json({
+    message: 'Transaction List',
+    data: transaction
+  })
+}
 
 exports.charge = async (req, res, next) => {
   const authHeader = req.headers.authorization
