@@ -4,7 +4,7 @@ const uuid = require('uuid')
 const v = new Validator()
 
 exports.show = async (req, res) => {
-  const id = req.params.id
+  const id = req.query.id
   const wallet = await Wallet.findOne({
     where: { id },
     include: [
