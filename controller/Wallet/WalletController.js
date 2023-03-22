@@ -82,7 +82,7 @@ exports.create = async (req, res) => {
 }
 
 exports.update = async (req, res) => {
-  const id = req.params.id
+  const id = req.query.id
 
   const wallet = await Wallet.findOne({
     where: { id },
