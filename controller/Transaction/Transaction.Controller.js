@@ -1,7 +1,9 @@
 const { WalletTransaction, Wallet, User, TransactionMethod } = require('../../models')
 const midtransClient = require('midtrans-client')
+const Validator = require('fastest-validator')
 const jwt = require('jsonwebtoken')
 const uuid = require('uuid')
+const v = new Validator()
 
 const coreApi = new midtransClient.CoreApi({
   isProduction: false,
@@ -127,18 +129,18 @@ exports.status = async (req, res) => {
         }
         await userTransaction.update(payload)
       } else if (transactionStatus === 'settlement') {
-        const payloadTransaction = {
+        const transactionPayload = {
           transaction_status: 'done'
         }
 
         const newAmount = previousAmount + parseFloat(response.gross_amount)
 
-        const payloadWallet = {
+        const walletPayload = {
           balance: newAmount
         }
 
-        await userTransaction.update(payloadTransaction)
-        await wallet.update(payloadWallet)
+        await userTransaction.update(transactionPayload)
+        await wallet.update(walletPayload)
         console.log(transactionStatus)
       } else if (transactionStatus === 'expire') {
         const payload = {
@@ -160,7 +162,6 @@ exports.status = async (req, res) => {
     })
 }
 
-// cancel transaction
 exports.cancel = async (req, res) => {
   const userTransaction = await WalletTransaction.findOne({ where: { id: req.query.transaction_id } })
   coreApi.transaction.cancel(req.query.transaction_id)
@@ -180,4 +181,57 @@ exports.cancel = async (req, res) => {
         data: err.message
       })
     })
+}
+
+exports.payment = async (req, res, next) => {
+  const authHeader = req.headers.authorization
+  const token = authHeader && authHeader.split(' ')[1]
+  const decoded = jwt.verify(token, process.env.ACCESS_TOKEN)
+
+  const wallet = await Wallet.findOne({ where: { user_id: decoded.user.id } })
+  const currentBalance = wallet.balance
+
+  const schema = {
+    balance: 'number|positive'
+  }
+
+  const validate = v.validate(req.body, schema)
+  if (validate.length) {
+    return res.status(400).json(validate)
+  }
+
+  if (currentBalance < req.body.balance) {
+    return res.status(400).json({
+      message: 'insufficient balance!',
+      balance: currentBalance
+    })
+  }
+
+  try {
+    const transactionPayload = {
+      id: uuid.v4(),
+      user_id: decoded.user.id,
+      wallet_id: wallet.id,
+      transaction_method_id: null,
+      amount: req.body.balance,
+      notes: req.body.notes || null,
+      transaction_type: 'credit',
+      transaction_status: 'done'
+    }
+
+    const newBalance = currentBalance - req.body.balance
+    const walletPayload = {
+      balance: newBalance
+    }
+
+    const transaction = await WalletTransaction.create(transactionPayload)
+    await wallet.update(walletPayload)
+
+    res.status(200).json({
+      message: 'Transaction Success',
+      data: transaction
+    })
+  } catch (error) {
+    res.status(400).json(error)
+  }
 }
