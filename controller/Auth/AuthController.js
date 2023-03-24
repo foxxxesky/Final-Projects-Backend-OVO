@@ -36,9 +36,16 @@ exports.login = async (req, res) => {
   })
 
   if (created) {
+    const session = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone
+    }
+
     const accessToken = jwt.sign({
-      user: { phone, email }
-    }, ACCESS_TOKEN, { expiresIn: '6h' })
+      user: session
+    }, ACCESS_TOKEN, { expiresIn: '48h' })
 
     res.status(200).json({
       message: 'Register Success!',
@@ -52,9 +59,16 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: 'Login failed!' })
     }
 
+    const session = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone
+    }
+
     const accessToken = jwt.sign({
-      user: { phone, email }
-    }, ACCESS_TOKEN, { expiresIn: '6h' })
+      user: session
+    }, ACCESS_TOKEN, { expiresIn: '48h' })
 
     res.status(200).json({
       message: 'Login Success!',
@@ -98,7 +112,7 @@ exports.user = async (req, res) => {
 }
 
 exports.edit = async (req, res) => {
-  const id = req.params.id
+  const id = req.query.id
 
   const user = await User.findOne({
     where: { id },
@@ -126,7 +140,7 @@ exports.edit = async (req, res) => {
     await user.update(req.body)
     res.status(200).json({
       message: 'Data successfuly updated!',
-      user
+      data: user
     })
   } catch (error) {
     res.status(400).json(error)

@@ -30,7 +30,7 @@ module.exports = {
       },
       transaction_method_id: {
         type: Sequelize.UUID,
-        allowNull: false,
+        defaultValue: null,
         references: {
           model: 'transaction_methods',
           key: 'id'
@@ -51,7 +51,7 @@ module.exports = {
         allowNull: false
       },
       transaction_status: {
-        type: Sequelize.ENUM('pending', 'done', 'failed'),
+        type: Sequelize.ENUM('pending', 'done', 'failed', 'canceled'),
         allowNull: false
       },
       createdAt: {
