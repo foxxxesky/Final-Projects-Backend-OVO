@@ -75,7 +75,7 @@ exports.charge = async (req, res, next) => {
 
   // custom expiry
   req.body.custom_expiry = {
-    expiry_duration: 5, // set to 30 minutes
+    expiry_duration: 5, // set to 5 minutes
     unit: 'minute'
   }
 
