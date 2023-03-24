@@ -75,7 +75,7 @@ exports.charge = async (req, res, next) => {
 
   // custom expiry
   req.body.custom_expiry = {
-    expiry_duration: 30, // set to 30 minutes
+    expiry_duration: 5, // set to 30 minutes
     unit: 'minute'
   }
 
@@ -108,10 +108,49 @@ exports.charge = async (req, res, next) => {
 }
 
 exports.status = async (req, res) => {
+  const authHeader = req.headers.authorization
+  const token = authHeader && authHeader.split(' ')[1]
+  const decoded = jwt.verify(token, process.env.ACCESS_TOKEN)
+
+  const wallet = await Wallet.findOne({ where: { user_id: decoded.user.id } })
+  const previousAmount = wallet.balance
+
+  const userTransaction = await WalletTransaction.findOne({ where: { id: req.query.transaction_id } })
+
   coreApi.transaction.status(req.query.transaction_id)
-    .then((response) => {
+    .then(async (response) => {
+      const transactionStatus = response.transaction_status
+
+      if (transactionStatus === 'pending') {
+        const payload = {
+          transaction_status: response.transaction_status
+        }
+        await userTransaction.update(payload)
+      } else if (transactionStatus === 'settlement') {
+        const payloadTransaction = {
+          transaction_status: 'done'
+        }
+
+        const newAmount = previousAmount + parseFloat(response.gross_amount)
+
+        const payloadWallet = {
+          balance: newAmount
+        }
+
+        await userTransaction.update(payloadTransaction)
+        await wallet.update(payloadWallet)
+        console.log(transactionStatus)
+      } else if (transactionStatus === 'expire') {
+        const payload = {
+          transaction_status: 'failed'
+        }
+
+        await userTransaction.update(payload)
+      }
+
       res.status(200).json({
-        data: response
+        midtrans: response,
+        user_transaction: userTransaction
       })
     })
     .catch((err) => {
@@ -120,3 +159,5 @@ exports.status = async (req, res) => {
       })
     })
 }
+
+// cancel transaction

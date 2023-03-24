@@ -11,6 +11,9 @@ exports.show = async (req, res) => {
 
   const wallet = await Wallet.findOne({
     where: { user_id: decoded.user.id },
+    attributes: {
+      exclude: ['createdAt', 'updatedAt']
+    },
     include: [
       {
         model: User,
