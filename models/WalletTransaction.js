@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     amount: DataTypes.INTEGER,
     notes: DataTypes.TEXT,
     transaction_type: DataTypes.ENUM('debit', 'credit'),
-    transaction_status: DataTypes.ENUM('pending', 'done', 'failed')
+    transaction_status: DataTypes.ENUM('pending', 'done', 'failed', 'canceled')
   }, {
     sequelize,
     modelName: 'WalletTransaction',

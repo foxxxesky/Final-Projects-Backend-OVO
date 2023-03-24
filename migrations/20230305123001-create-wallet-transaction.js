@@ -51,7 +51,7 @@ module.exports = {
         allowNull: false
       },
       transaction_status: {
-        type: Sequelize.ENUM('pending', 'done', 'failed'),
+        type: Sequelize.ENUM('pending', 'done', 'failed', 'canceled'),
         allowNull: false
       },
       createdAt: {

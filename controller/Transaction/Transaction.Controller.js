@@ -161,3 +161,23 @@ exports.status = async (req, res) => {
 }
 
 // cancel transaction
+exports.cancel = async (req, res) => {
+  const userTransaction = await WalletTransaction.findOne({ where: { id: req.query.transaction_id } })
+  coreApi.transaction.cancel(req.query.transaction_id)
+    .then(async (response) => {
+      const payload = {
+        transaction_status: 'canceled'
+      }
+      userTransaction.update(payload)
+
+      res.status(200).json({
+        midtrans: response,
+        user_transaction: userTransaction
+      })
+    })
+    .catch((err) => {
+      res.status(200).json({
+        data: err.message
+      })
+    })
+}
