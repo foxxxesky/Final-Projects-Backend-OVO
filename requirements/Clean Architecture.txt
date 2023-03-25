@@ -1,45 +1,25 @@
-=================== Presentation Layer =======================
-routes/
-    L Auth/
-        L auth.js
-    L Transaction/
-        L transasaction.js
-    L Wallet/
-        L wallet.js
-=================== Application Layer =========================
-controller/
-    L Auth/
-        L AuthController.js
-    L Transaction/
-        L TransactionController.js
-    L Wallet/
-        L WalletController.js
-middleware/
-    L Auth.js
-=================== Domain Layer ==============================
-models/
-    L index.js
-    L TransactionMethod.js
-    L User.js
-    L Wallet.js
-    L WalletTransaction.js
-    L WalletWithdrawals.js
-=================== Data Layer ================================
-config/
-    L config.js
-migration/
-    L user.js
-    L wallet.js
-    L transasaction-method.js
-    L wallet-transaction.js
-    L wallet-transaction.js
-    L wallet-withdrawals.js
-seeders/
-    L transaction-method.js
-=================== Infrastructure Layer =======================
-bin/
-    L www
-.env
-.eslintrc.js
-app.js
-package.json
+     
+        ======= Presentation Layer ========
+        routes/
+            L Auth/
+            L Transaction/
+            L Wallet/
+        ======= Application Layer =========
+        controller/
+            L Auth/
+            L Transaction/
+            L Wallet/
+        middleware/
+        ======= Domain Layer ==============
+        models/
+        ====== Data Layer =================
+        config/
+        migration/
+        seeders/
+        ====== Infrastructure Layer ======
+        bin/
+        .env
+        .eslintrc.js
+        app.js
+        package.json
+
