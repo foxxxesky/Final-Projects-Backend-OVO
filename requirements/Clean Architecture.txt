@@ -1,25 +1,24 @@
      
         ======= Presentation Layer ========
-        routes/
-            L Auth/
-            L Transaction/
-            L Wallet/
+        routes/                 <-- handling incoming request
+            L Auth/             <-- auth routes
+            L Transaction/      <-- auth routes
+            L Wallet/           <-- wallet routes
         ======= Application Layer =========
-        controller/
-            L Auth/
-            L Transaction/
-            L Wallet/
+        controller/             <-- contains business logic of application
+            L Auth/             <-- auth logic
+            L Transaction/      <-- transaction logic
+            L Wallet/           <-- wallet logic
         middleware/
         ======= Domain Layer ==============
-        models/
+        models/                 <-- contains core business logic of application
         ====== Data Layer =================
-        config/
-        migration/
-        seeders/
+        config/                 <-- handles data presistence
+        migrations/             <-- application migration
+        seeders/                <-- application seeders
         ====== Infrastructure Layer ======
-        bin/
-        .env
-        .eslintrc.js
-        app.js
-        package.json
+        bin/                    <-- express script
+        .env                    <-- application environment
+        app.js                  <-- express server
+        package.json            <-- application package
 
