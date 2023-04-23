@@ -201,7 +201,7 @@
                 <mxCell id="55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;entryX=-0.194;entryY=0.496;entryDx=0;entryDy=0;entryPerimeter=0;" parent="3" source="47" target="36" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="47" value="Redirect ke halaman utama" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" parent="3" vertex="1">
+                <mxCell id="47" value="Menampilkan response" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" parent="3" vertex="1">
                     <mxGeometry x="100" y="650" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="53" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="3" source="52" target="6" edge="1">
