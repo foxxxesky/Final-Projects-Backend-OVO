@@ -1,4 +1,4 @@
-const { WalletTransaction, Wallet, User, TransactionMethod } = require('../../models')
+const { WalletTransaction, Wallet, User, Products, TransactionMethod } = require('../../models')
 const midtransClient = require('midtrans-client')
 const Validator = require('fastest-validator')
 const jwt = require('jsonwebtoken')
@@ -192,7 +192,7 @@ exports.payment = async (req, res, next) => {
   const currentBalance = wallet.balance
 
   const schema = {
-    balance: 'number|positive'
+    product_id: 'uuid'
   }
 
   const validate = v.validate(req.body, schema)
@@ -200,7 +200,10 @@ exports.payment = async (req, res, next) => {
     return res.status(400).json(validate)
   }
 
-  if (currentBalance < req.body.balance) {
+  const product = await Products.findOne({ where: { id: req.body.product_id } })
+  // res.json(product)
+
+  if (currentBalance < product.price) {
     return res.status(400).json({
       message: 'insufficient balance!',
       balance: currentBalance
@@ -213,13 +216,14 @@ exports.payment = async (req, res, next) => {
       user_id: decoded.user.id,
       wallet_id: wallet.id,
       transaction_method_id: null,
-      amount: req.body.balance,
+      product_id: req.body.product_id || null,
+      amount: product.price,
       notes: req.body.notes || null,
       transaction_type: 'credit',
       transaction_status: 'done'
     }
 
-    const newBalance = currentBalance - req.body.balance
+    const newBalance = currentBalance - product.price
     const walletPayload = {
       balance: newBalance
     }
