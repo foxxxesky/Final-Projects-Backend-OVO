@@ -10,17 +10,65 @@ module.exports = {
       // Indosat
       // Smartfren
       // Telkomsel
-      // Telkomsel By.U
-      // Tri
-      // XL
       {
         id: uuid.v4(),
-        name: '',
+        name: 'TELKOMSEL 5K',
         category: 'Pulsa/Paket Data',
-        price: 1000,
+        price: 5395,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'TELKOMSEL 10K',
+        category: 'Pulsa/Paket Data',
+        price: 10395,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'TELKOMSEL 20K',
+        category: 'Pulsa/Paket Data',
+        price: 20095,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'TELKOMSEL 25K',
+        category: 'Pulsa/Paket Data',
+        price: 24995,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'TELKOMSEL 50K',
+        category: 'Pulsa/Paket Data',
+        price: 49975,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'TELKOMSEL 100K',
+        category: 'Pulsa/Paket Data',
+        price: 99375,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'TELKOMSEL 200K',
+        category: 'Pulsa/Paket Data',
+        price: 198975,
         createdAt: new Date(),
         updatedAt: new Date()
       }
+      // Telkomsel By.U
+      // Tri
+      // XL
     ])
   },
 
