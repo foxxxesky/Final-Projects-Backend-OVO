@@ -8,110 +8,30 @@ module.exports = {
     await queryInterface.bulkInsert('transaction_methods', [
       {
         id: uuid.v4(),
-        method_name: 'm-BCA',
+        method_name: 'BCA',
         icon: null,
         instruction: 'Lorem Ipsum',
-        category: 'Internet / Mobile banking',
+        category: 'Mobile banking',
         status: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         id: uuid.v4(),
-        method_name: 'Klik BCA',
+        method_name: 'BNI',
         icon: null,
         instruction: 'Lorem Ipsum',
-        category: 'Internet / Mobile banking',
+        category: 'Mobile banking',
         status: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         id: uuid.v4(),
-        method_name: 'Livin',
+        method_name: 'BRI',
         icon: null,
         instruction: 'Lorem Ipsum',
-        category: 'Internet / Mobile banking',
-        status: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        id: uuid.v4(),
-        method_name: 'Mandiri Internet',
-        icon: null,
-        instruction: 'Lorem Ipsum',
-        category: 'Internet / Mobile banking',
-        status: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        id: uuid.v4(),
-        method_name: 'Nobu Internet Banking',
-        icon: null,
-        instruction: 'Lorem Ipsum',
-        category: 'Internet / Mobile banking',
-        status: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        id: uuid.v4(),
-        method_name: 'BNI Mobile',
-        icon: null,
-        instruction: 'Lorem Ipsum',
-        category: 'Internet / Mobile banking',
-        status: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        id: uuid.v4(),
-        method_name: 'BNI iBank Personal',
-        icon: null,
-        instruction: 'Lorem Ipsum',
-        category: 'Internet / Mobile banking',
-        status: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        id: uuid.v4(),
-        method_name: 'BRI Mobile',
-        icon: null,
-        instruction: 'Lorem Ipsum',
-        category: 'Internet / Mobile banking',
-        status: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        id: uuid.v4(),
-        method_name: 'BRI Internet Banking',
-        icon: null,
-        instruction: 'Lorem Ipsum',
-        category: 'Internet / Mobile banking',
-        status: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        id: uuid.v4(),
-        method_name: 'BSI SMS Banking',
-        icon: null,
-        instruction: 'Lorem Ipsum',
-        category: 'Internet / Mobile banking',
-        status: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        id: uuid.v4(),
-        method_name: 'BSI Mobile Banking',
-        icon: null,
-        instruction: 'Lorem Ipsum',
-        category: 'Internet / Mobile banking',
+        category: 'Mobile banking',
         status: 1,
         createdAt: new Date(),
         updatedAt: new Date()

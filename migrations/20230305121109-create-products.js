@@ -14,16 +14,14 @@ module.exports = {
       },
       category: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: false
       },
       code: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: false
       },
       price: {
-        type: Sequelize.DOUBLE,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       createdAt: {
