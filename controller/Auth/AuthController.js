@@ -6,6 +6,29 @@ const bcrypt = require('bcrypt')
 const uuid = require('uuid')
 const v = new Validator()
 
+exports.findUser = async (req, res) => {
+  const schema = {
+    phone: 'string|unique|min:10'
+  }
+
+  const validate = v.validate(req.body, schema)
+
+  if (validate.length) {
+    return res.status(400).json(validate)
+  }
+
+  try {
+    const user = await User.findOne({ where: { phone: req.body.phone } })
+
+    res.json({
+      message: 'User Found!',
+      user
+    })
+  } catch (error) {
+    res.status(400).json({ message: 'User not found!' })
+  }
+}
+
 exports.register = async (req, res) => {
   const schema = {
     phone: 'string|unique|min:10',
