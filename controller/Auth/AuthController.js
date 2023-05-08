@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt')
 const uuid = require('uuid')
 const v = new Validator()
 
-exports.login = async (req, res) => {
+exports.register = async (req, res) => {
   const schema = {
     phone: 'string|unique|min:10',
     name: 'string|min:3|optional',
@@ -21,26 +21,19 @@ exports.login = async (req, res) => {
     return res.status(400).json(validate)
   }
 
-  const salt = bcrypt.genSaltSync(10)
-  const hash = bcrypt.hashSync(String(securityCode), salt)
+  try {
+    req.body.id = uuid.v4()
+    const salt = bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(String(securityCode), salt)
+    req.body.security_code = hash
 
-  const [user, created] = await User.findOrCreate({
-    where: { phone },
-    attributes: ['id', 'name', 'phone', 'email', 'photo', 'email_verified', 'phone_verified', 'security_code'],
-    defaults: {
-      id: uuid.v4(),
+    const user = await User.create(req.body)
+
+    const session = {
+      id: req.body.id,
       name,
       email,
-      security_code: hash
-    }
-  })
-
-  if (created) {
-    const session = {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      phone: user.phone
+      phone
     }
 
     const accessToken = jwt.sign({
@@ -52,8 +45,27 @@ exports.login = async (req, res) => {
       access_token: accessToken,
       data: user
     })
-  } else {
-    const checkPass = bcrypt.compareSync(String(securityCode), user.security_code)
+  } catch (error) {
+    res.status(400).json({ message: 'Email or Phone Already Registered!' })
+  }
+}
+
+exports.login = async (req, res) => {
+  const schema = {
+    phone: 'string|unique|min:10',
+    security_code: 'number|min:6'
+  }
+
+  const validate = v.validate(req.body, schema)
+
+  if (validate.length) {
+    return res.status(400).json(validate)
+  }
+
+  try {
+    const user = await User.findOne({ where: { phone: req.body.phone } })
+
+    const checkPass = bcrypt.compareSync(String(req.body.security_code), user.security_code)
 
     if (!checkPass) {
       return res.status(400).json({ message: 'Login failed!' })
@@ -75,6 +87,8 @@ exports.login = async (req, res) => {
       access_token: accessToken,
       data: user
     })
+  } catch (error) {
+    res.status(400).json({ message: 'User not found!' })
   }
 }
 
