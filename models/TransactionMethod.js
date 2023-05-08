@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate (models) {
       TransactionMethod.hasMany(models.WalletTransaction, { foreignKey: 'id', as: 'transaction_method' })
-      TransactionMethod.hasMany(models.WalletWithdrawals, { foreignKey: 'id', as: 'withdrawals_method' })
     }
   }
   TransactionMethod.init({
