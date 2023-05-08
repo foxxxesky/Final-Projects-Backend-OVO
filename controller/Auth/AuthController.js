@@ -17,16 +17,16 @@ exports.findUser = async (req, res) => {
     return res.status(400).json(validate)
   }
 
-  try {
-    const user = await User.findOne({ where: { phone: req.body.phone } })
+  const user = await User.findOne({ where: { phone: req.body.phone } })
 
-    res.json({
-      message: 'User Found!',
-      user
-    })
-  } catch (error) {
-    res.status(400).json({ message: 'User not found!' })
+  if (!user) {
+    return res.status(400).json({ message: 'User Not Found!' })
   }
+
+  res.status(200).json({
+    message: 'User Found!',
+    user
+  })
 }
 
 exports.register = async (req, res) => {
