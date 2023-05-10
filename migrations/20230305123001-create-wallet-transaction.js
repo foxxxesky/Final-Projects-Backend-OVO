@@ -38,6 +38,16 @@ module.exports = {
         onDelete: 'cascade',
         onUpdate: 'cascade'
       },
+      product_id: {
+        type: Sequelize.UUID,
+        defaultValue: null,
+        references: {
+          model: 'products',
+          key: 'id'
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
+      },
       amount: {
         type: Sequelize.INTEGER,
         allowNull: false
