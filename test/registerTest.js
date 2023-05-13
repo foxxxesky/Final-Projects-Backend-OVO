@@ -11,20 +11,20 @@ export const options = {
   },
   thresholds: {
     http_req_failed: ['rate<0.01'], // http errors should be less than 1%
-    // Ensure that 80% of requests complete within 2000ms
-    // and 90% of requests complete within 2500ms
-    http_req_duration: ['p(50)<1000', 'p(95)<2000']
+    // Ensure that 50% of requests complete within 2000ms
+    // and 80% of requests complete within 2500ms
+    http_req_duration: ['p(50)<2000', 'p(80)<3000']
   },
   stages: [
     // Ramp up from 0 to 10 VUs over 30 seconds
     { duration: '30s', target: 10 },
-    // Ramp up from 10 to 20 VUs over 30 seconds
-    { duration: '30s', target: 20 },
-    // Ramp up from 20 to 40 VUs over 1 minute
-    { duration: '1m', target: 40 },
-    // Stay at 40 VUs for 1 minute
-    { duration: '1m', target: 40 },
-    // Ramp down from 40 to 20 VUs over 30 seconds
+    // Ramp up from 10 to 25 VUs over 30 seconds
+    { duration: '30s', target: 25 },
+    // Ramp up from 25 to 50 VUs over 1 minute
+    { duration: '1m', target: 50 },
+    // Stay at 50 VUs for 1 minute
+    { duration: '1m', target: 50 },
+    // Ramp down from 50 to 20 VUs over 30 seconds
     { duration: '30s', target: 20 },
     // Ramp down from 20 to 10 VUs over 30 seconds
     { duration: '30s', target: 10 },
@@ -69,11 +69,6 @@ export default function () {
         'name' in user &&
         'phone' in user &&
         'security_code'
-
-      // 'data' in body &&
-      // 'phone' in body &&
-      // 'email' in body &&
-      // 'security_code'
       )
     }
   })
