@@ -33,7 +33,7 @@ export const options = {
   ]
 }
 export default function () {
-  const url = 'http://178.128.21.253:3030/api/user/register'
+  const url = `${__ENV.SERVER}/user/register`
   const email = `user${Math.floor(Math.random() * 100000)}@example.com`
   const name = `user_${Math.floor(Math.random() * 100000)}`
   const phone = `+1${Math.floor(Math.random() * 9000000000) + 1000000000}`
