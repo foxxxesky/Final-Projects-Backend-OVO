@@ -1,6 +1,6 @@
-# Final-Projects-Backend-OVO
+# Final-Projects-Backend-Visipay
 
-OVO Backend Final Project for people with visual disabilities or low-vision
+Visipay Backend Final Project for people with visual disabilities or low-vision
 
 # To run projects
 
