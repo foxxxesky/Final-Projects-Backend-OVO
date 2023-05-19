@@ -129,7 +129,7 @@ exports.user = async (req, res) => {
       const phone = decode.user.phone
       const user = await User.findOne({
         where: { phone },
-        attributes: ['id', 'name', 'phone', 'email', 'photo', 'email_verified', 'phone_verified']
+        attributes: ['id', 'name', 'phone', 'email', 'email_verified', 'phone_verified']
       })
 
       if (user != null) {
@@ -162,7 +162,7 @@ exports.edit = async (req, res) => {
 
     const user = await User.findOne({
       where: { id },
-      attributes: ['id', 'name', 'phone', 'email', 'photo', 'email_verified', 'phone_verified']
+      attributes: ['id', 'name', 'phone', 'email', 'email_verified', 'phone_verified']
     })
 
     try {
@@ -176,7 +176,7 @@ exports.edit = async (req, res) => {
       const validate = v.validate(req.body, schema)
 
       if (validate.length) {
-        res.status(400).json(validate)
+        return res.status(400).json(validate)
       }
 
       const updatedUser = await user.update(req.body)
