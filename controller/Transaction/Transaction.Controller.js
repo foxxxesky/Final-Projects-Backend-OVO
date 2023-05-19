@@ -91,9 +91,9 @@ exports.charge = async (req, res, next) => {
           id: response.transaction_id,
           user_id: decoded.user.id,
           wallet_id: wallet.id,
-          transaction_method_id: null,
+          transaction_method_id: req.body.transaction_method_id,
           amount: parseFloat(response.gross_amount),
-          notes: null,
+          notes: req.body.notes,
           transaction_type: 'debit',
           transaction_status: response.transaction_status
         }
