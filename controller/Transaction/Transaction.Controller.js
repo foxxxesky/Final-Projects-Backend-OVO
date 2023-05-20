@@ -1,6 +1,7 @@
 const { WalletTransaction, Wallet, User, Products, Promo, TransactionMethod } = require('../../models')
 const midtransClient = require('midtrans-client')
 const Validator = require('fastest-validator')
+const { Op } = require('sequelize')
 const jwt = require('jsonwebtoken')
 const uuid = require('uuid')
 const v = new Validator()
@@ -83,6 +84,15 @@ exports.charge = async (req, res, next) => {
   }
 
   try {
+    // transaction method
+    const method = await TransactionMethod.findOne({ where: { method_name: { [Op.like]: req.body.bank_transfer.bank } } })
+
+    if (!method) {
+      req.body.transaction_method_id = null
+    } else {
+      req.body.transaction_method_id = method.id
+    }
+
     // transaction
     req.body.transaction_details.order_id = uuid.v4()
 
@@ -238,6 +248,7 @@ exports.payment = async (req, res, next) => {
   try {
     const product = await Products.findOne({ where: { id: req.body.product_id } })
     const promo = await Promo.findOne({ where: { id: req.body.promo_id } })
+    const method = await TransactionMethod.findOne({ where: { method_name: 'Visipay Wallet' } })
 
     if (!product) {
       return res.status(400).json({ message: 'invalid product id' })
@@ -266,7 +277,7 @@ exports.payment = async (req, res, next) => {
       id: uuid.v4(),
       user_id: decoded.user.id,
       wallet_id: wallet.id,
-      transaction_method_id: null,
+      transaction_method_id: method.id,
       product_id: req.body.product_id || null,
       promo_id: req.body.promo_id || null,
       amount: product.price,

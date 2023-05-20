@@ -8,7 +8,7 @@ module.exports = {
     await queryInterface.bulkInsert('transaction_methods', [
       {
         id: uuid.v4(),
-        method_name: 'E-Wallet',
+        method_name: 'Visipay Wallet',
         instruction: 'Lorem Ipsum',
         category: 'E-Wallet',
         status: 1,
