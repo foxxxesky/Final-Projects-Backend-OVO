@@ -20,8 +20,8 @@ module.exports.detail = async (req, res) => {
     where: { ...conditions }
   })
 
-  if (!promo) {
-    return res.status(400).json({ message: 'Product not found!' })
+  if (!promo || Object.keys(conditions).length === 0) {
+    return res.status(400).json({ message: 'Promo not found!' })
   }
 
   res.status(200).json({

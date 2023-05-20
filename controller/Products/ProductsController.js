@@ -80,12 +80,12 @@ exports.show = async (req, res) => {
 
 module.exports.detail = async (req, res) => {
   const conditions = {}
-
+  console.log(!conditions)
   if (req.query.id) {
     conditions.id = req.query.id
   }
 
-  if (req.query.name !== null) {
+  if (req.query.name) {
     conditions.name = {
       [Op.like]: `%${req.query.name}%`
     }
@@ -95,7 +95,7 @@ module.exports.detail = async (req, res) => {
     where: { ...conditions }
   })
 
-  if (!product) {
+  if (!product || Object.keys(conditions).length === 0) {
     return res.status(400).json({ message: 'Product not found!' })
   }
 
