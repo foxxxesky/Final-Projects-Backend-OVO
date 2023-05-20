@@ -1,8 +1,6 @@
-const { WalletTransaction, Wallet, User, Products, TransactionMethod } = require('../../models')
-const Validator = require('fastest-validator')
+const { Products } = require('../../models')
 const jwt = require('jsonwebtoken')
-const uuid = require('uuid')
-const v = new Validator()
+const { Op } = require('sequelize')
 
 exports.show = async (req, res) => {
   const authHeader = req.headers.authorization
@@ -41,12 +39,39 @@ exports.show = async (req, res) => {
     }
   }
 
-  const product = await Products.findAll({
+  const products = await Products.findAll({
     where: { ...conditions }
   })
 
   res.status(200).json({
     message: 'Product List',
+    data: products
+  })
+}
+
+module.exports.detail = async (req, res) => {
+  const conditions = {}
+
+  if (req.query.id) {
+    conditions.id = req.query.id
+  }
+
+  if (req.query.name !== null) {
+    conditions.name = {
+      [Op.like]: `%${req.query.name}%`
+    }
+  }
+
+  const product = await Products.findOne({
+    where: { ...conditions }
+  })
+
+  if (!product) {
+    return res.status(400).json({ message: 'Product not found!' })
+  }
+
+  res.status(200).json({
+    message: 'Product Detail',
     data: product
   })
 }
