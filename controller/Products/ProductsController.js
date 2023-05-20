@@ -39,6 +39,35 @@ exports.show = async (req, res) => {
     }
   }
 
+  if (req.query.category === 'PLN') {
+    if (!req.body.id_pelanggan) {
+      return res.status(400).json({ message: 'ID pelanggan tidak ditemukan!' })
+    }
+    const billType = req.body.id_pelanggan.substring(0, 4)
+    conditions.category = req.query.category
+
+    if (billType === '0001') {
+      conditions.code = 'TL'
+    } else {
+      conditions.code = 'L'
+    }
+  }
+
+  if (req.query.category === 'PDAM') {
+    if (!req.body.id_pelanggan) {
+      return res.status(400).json({ message: 'ID pelanggan tidak ditemukan!' })
+    }
+
+    const billType = req.body.id_pelanggan.substring(0, 4)
+    conditions.category = req.query.category
+
+    if (billType === '0002') {
+      conditions.code = 'PA'
+    } else {
+      return res.status(400).json({ message: 'Bill not found!' })
+    }
+  }
+
   const products = await Products.findAll({
     where: { ...conditions }
   })
