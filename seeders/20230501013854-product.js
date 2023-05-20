@@ -6,6 +6,72 @@ const uuid = require('uuid')
 module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('products', [
+      // PLN TOKEN
+      {
+        id: uuid.v4(),
+        name: 'Token Listrik 20.000',
+        category: 'PLN',
+        code: 'TL',
+        price: 20000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'Token Listrik 50.000',
+        category: 'PLN',
+        code: 'TL',
+        price: 50000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'Token Listrik 100.000',
+        category: 'PLN',
+        code: 'TL',
+        price: 100000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'Token Listrik 200.000',
+        category: 'PLN',
+        code: 'TL',
+        price: 200000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'Token Listrik 500.000',
+        category: 'PLN',
+        code: 'TL',
+        price: 500000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      // PLN TAGIHAN
+      {
+        id: uuid.v4(),
+        name: 'Tagihan Listrik',
+        category: 'PLN',
+        code: 'L',
+        price: 100000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      // PDAM
+      {
+        id: uuid.v4(),
+        name: 'Tagihan PDAM',
+        category: 'PDAM',
+        code: 'PA',
+        price: 100000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
       // Axis
       {
         id: uuid.v4(),
