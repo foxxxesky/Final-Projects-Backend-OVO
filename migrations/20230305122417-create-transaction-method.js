@@ -12,10 +12,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      icon: {
-        type: Sequelize.STRING,
-        defaultValue: null
-      },
       instruction: {
         type: Sequelize.TEXT,
         allowNull: false

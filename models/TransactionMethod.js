@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   TransactionMethod.init({
     method_name: DataTypes.STRING,
-    icon: DataTypes.STRING,
     instruction: DataTypes.TEXT,
     category: DataTypes.STRING,
     status: DataTypes.BOOLEAN

@@ -8,8 +8,16 @@ module.exports = {
     await queryInterface.bulkInsert('transaction_methods', [
       {
         id: uuid.v4(),
+        method_name: 'E-Wallet',
+        instruction: 'Lorem Ipsum',
+        category: 'E-Wallet',
+        status: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
         method_name: 'BCA',
-        icon: null,
         instruction: 'Lorem Ipsum',
         category: 'Mobile banking',
         status: 1,
@@ -19,7 +27,6 @@ module.exports = {
       {
         id: uuid.v4(),
         method_name: 'BNI',
-        icon: null,
         instruction: 'Lorem Ipsum',
         category: 'Mobile banking',
         status: 1,
@@ -29,7 +36,6 @@ module.exports = {
       {
         id: uuid.v4(),
         method_name: 'BRI',
-        icon: null,
         instruction: 'Lorem Ipsum',
         category: 'Mobile banking',
         status: 1,
