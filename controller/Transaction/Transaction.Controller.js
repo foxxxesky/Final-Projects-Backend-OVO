@@ -298,3 +298,23 @@ exports.payment = async (req, res, next) => {
     res.status(400).json(error)
   }
 }
+
+exports.method = async (req, res) => {
+  const methods = await TransactionMethod.findAll()
+
+  res.status(200).json({
+    message: 'Transaction Method List',
+    data: methods
+  })
+}
+
+exports.methodDetail = async (req, res) => {
+  const methods = await TransactionMethod.findOne({
+    where: { id: req.query.id }
+  })
+
+  res.status(200).json({
+    message: 'Transaction Method Detail',
+    data: methods
+  })
+}
