@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
     discount: DataTypes.DOUBLE,
+    min_order: DataTypes.INTEGER,
     expired_at: DataTypes.DATE
   }, {
     sequelize,

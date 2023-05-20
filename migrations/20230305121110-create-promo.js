@@ -20,6 +20,10 @@ module.exports = {
         type: Sequelize.DOUBLE,
         allowNull: false
       },
+      min_order: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       expired_at: {
         allowNull: false,
         type: Sequelize.DATE

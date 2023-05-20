@@ -1,4 +1,4 @@
-const { WalletTransaction, Wallet, User, Products, TransactionMethod } = require('../../models')
+const { WalletTransaction, Wallet, User, Products, Promo, TransactionMethod } = require('../../models')
 const midtransClient = require('midtrans-client')
 const Validator = require('fastest-validator')
 const jwt = require('jsonwebtoken')
@@ -48,6 +48,20 @@ exports.show = async (req, res) => {
           exclude: ['createdAt', 'updatedAt']
         },
         as: 'transaction_method'
+      },
+      {
+        model: Products,
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        },
+        as: 'transaction_product'
+      },
+      {
+        model: Promo,
+        attributes: {
+          exclude: ['createdAt', 'updatedAt']
+        },
+        as: 'transaction_discount'
       }
     ]
   })
@@ -211,38 +225,64 @@ exports.payment = async (req, res, next) => {
   const currentBalance = wallet.balance
 
   const schema = {
-    product_id: 'uuid'
+    product_id: 'uuid',
+    promo_id: 'uuid|optional'
   }
 
   const validate = v.validate(req.body, schema)
+
   if (validate.length) {
     return res.status(400).json(validate)
   }
 
-  const product = await Products.findOne({ where: { id: req.body.product_id } })
-  // res.json(product)
-
-  if (currentBalance < product.price) {
-    return res.status(400).json({
-      message: 'insufficient balance!',
-      balance: currentBalance
-    })
-  }
-
   try {
+    const product = await Products.findOne({ where: { id: req.body.product_id } })
+    const promo = await Promo.findOne({ where: { id: req.body.promo_id } })
+
+    if (!product) {
+      return res.status(400).json({ message: 'invalid product id' })
+    }
+
+    if (!promo) {
+      return res.status(400).json({ message: 'invalid promo id' })
+    }
+
+    let discount = 0
+    if (product.price >= promo.min_order) {
+      discount = product.price * promo.discount
+      product.price = product.price - discount
+    } else {
+      req.body.promo_id = null
+    }
+
+    if (currentBalance < product.price) {
+      return res.status(400).json({
+        message: 'insufficient balance!',
+        balance: currentBalance
+      })
+    }
+
     const transactionPayload = {
       id: uuid.v4(),
       user_id: decoded.user.id,
       wallet_id: wallet.id,
       transaction_method_id: null,
       product_id: req.body.product_id || null,
+      promo_id: req.body.promo_id || null,
       amount: product.price,
       notes: req.body.notes || null,
       transaction_type: 'credit',
       transaction_status: 'done'
     }
 
-    const newBalance = currentBalance - product.price
+    let newBalance = 0
+
+    if (promo !== null) {
+      newBalance = currentBalance - (product.price - discount)
+    } else {
+      newBalance = currentBalance - product.price
+    }
+
     const walletPayload = {
       balance: newBalance
     }
