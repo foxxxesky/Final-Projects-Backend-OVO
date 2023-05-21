@@ -9,7 +9,7 @@ module.exports = {
       {
         id: uuid.v4(),
         method_name: 'Visipay Wallet',
-        instruction: 'Lorem Ipsum',
+        instruction: null,
         category: 'E-Wallet',
         status: 1,
         createdAt: new Date(),
@@ -18,7 +18,7 @@ module.exports = {
       {
         id: uuid.v4(),
         method_name: 'BCA',
-        instruction: 'Lorem Ipsum',
+        instruction: '1. Login ke m-BCA \n2. Pilih menu M-Transfer lalu TRANSFER BCA VIRTUAL ACCOUNT\n3. Masukan Nomer Virtual Account\n4. Masukin pin m-BCA.\n5. Ikuti perintah selanjutnya untuk menyelesaikan proses top-up',
         category: 'Mobile banking',
         status: 1,
         createdAt: new Date(),
@@ -27,7 +27,7 @@ module.exports = {
       {
         id: uuid.v4(),
         method_name: 'BNI',
-        instruction: 'Lorem Ipsum',
+        instruction: '1. Buka aplikasi BNI Mobile Banking \n2. Pilih menu Transfer lalu nomor Virtual Account \n3. Masukan nomer Virtual Account \n4. Konfirmasi dan masukan Password Transaksi \n5. Ikuti instruksi selanjutnya untuk menyelesaikan transaksi',
         category: 'Mobile banking',
         status: 1,
         createdAt: new Date(),
@@ -36,7 +36,7 @@ module.exports = {
       {
         id: uuid.v4(),
         method_name: 'BRI',
-        instruction: 'Lorem Ipsum',
+        instruction: '1. Masuk ke aplikasi BRImo \n2. Pilih menu Transaksi Lain \n3. Pilih menu Pembayaran \n4. Pilih menu Lainnya \n5. Pilih menu BRIVA \n6. Masukan nomer Virtual Account \n7. Konfirmasi dan masukan Password Transaksi \n7. Ikuti instruksi selanjutnya untuk menyelesaikan transaksi',
         category: 'Mobile banking',
         status: 1,
         createdAt: new Date(),
