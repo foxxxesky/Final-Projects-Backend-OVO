@@ -4,7 +4,7 @@ exports.show = async (req, res) => {
   const promo = await Promo.findAll()
 
   res.status(200).json({
-    message: 'Product List',
+    message: 'Promo List',
     data: promo
   })
 }
