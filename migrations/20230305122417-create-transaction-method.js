@@ -14,7 +14,7 @@ module.exports = {
       },
       instruction: {
         type: Sequelize.TEXT,
-        allowNull: false
+        defaultValue: null
       },
       category: {
         type: Sequelize.STRING,
