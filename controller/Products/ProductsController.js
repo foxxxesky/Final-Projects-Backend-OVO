@@ -68,6 +68,10 @@ exports.show = async (req, res) => {
     }
   }
 
+  if (req.query.code) {
+    conditions.code = req.query.code
+  }
+
   const products = await Products.findAll({
     where: { ...conditions }
   })
