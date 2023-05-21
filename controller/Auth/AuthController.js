@@ -32,8 +32,8 @@ exports.findUser = async (req, res) => {
 exports.register = async (req, res) => {
   const schema = {
     phone: 'string|unique|min:10',
-    name: 'string|min:3|optional',
-    email: 'email|optional',
+    name: 'string|min:3',
+    email: 'email',
     security_code: 'number|min:6'
   }
 
@@ -129,7 +129,7 @@ exports.user = async (req, res) => {
       const phone = decode.user.phone
       const user = await User.findOne({
         where: { phone },
-        attributes: ['id', 'name', 'phone', 'email', 'photo', 'email_verified', 'phone_verified']
+        attributes: ['id', 'name', 'phone', 'email', 'email_verified', 'phone_verified']
       })
 
       if (user != null) {
@@ -140,7 +140,7 @@ exports.user = async (req, res) => {
       }
     } catch (error) {
       res.status(400).json({
-        message: 'Invalid token!'
+        message: 'Invalid User!'
       })
     }
   } else {
@@ -149,37 +149,60 @@ exports.user = async (req, res) => {
 }
 
 exports.edit = async (req, res) => {
-  const id = req.query.id
+  if (req.headers.authorization != null) {
+    const authHeader = req.headers.authorization
+    const token = authHeader && authHeader.split(' ')[1]
 
-  const user = await User.findOne({
-    where: { id },
-    attributes: ['id', 'name', 'phone', 'email', 'photo']
-  })
-
-  if (!user) {
-    return res.status(400).json({ message: 'User not found!' })
-  }
-
-  try {
-    const schema = {
-      name: 'string|optional|min:3',
-      phone: 'string|optional|min:10|unique',
-      email: 'string|email|optional|unique',
-      photo: 'string|optional'
+    if (token == null) {
+      return res.status(400).json({ error: 'Unauthorized Access!' })
     }
 
-    const validate = v.validate(req.body, schema)
+    const decode = jwt.verify(token, ACCESS_TOKEN)
+    const id = decode.user.id
 
-    if (validate.length) {
-      return res.status(400).json(validate)
-    }
-
-    await user.update(req.body)
-    res.status(200).json({
-      message: 'Data successfuly updated!',
-      data: user
+    const user = await User.findOne({
+      where: { id },
+      attributes: ['id', 'name', 'phone', 'email', 'email_verified', 'phone_verified']
     })
-  } catch (error) {
-    res.status(400).json(error)
+
+    try {
+      const schema = {
+        phone: 'string|unique|min:10|optional',
+        name: 'string|min:3|optional',
+        email: 'email|optional',
+        security_code: 'number|min:6|optional'
+      }
+
+      const validate = v.validate(req.body, schema)
+
+      if (validate.length) {
+        return res.status(400).json(validate)
+      }
+
+      const updatedUser = await user.update(req.body)
+
+      const session = {
+        id: updatedUser.id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        phone: updatedUser.phone
+      }
+
+      const accessToken = jwt.sign({
+        user: session
+      }, ACCESS_TOKEN, { expiresIn: '48h' })
+
+      res.status(200).json({
+        message: 'User profile updated!',
+        access_token: accessToken,
+        data: updatedUser
+      })
+    } catch (error) {
+      res.status(400).json({
+        message: 'Invalid User!'
+      })
+    }
+  } else {
+    res.status(400).json({ message: 'Unauthorized request, a token is required for authentication!' })
   }
 }

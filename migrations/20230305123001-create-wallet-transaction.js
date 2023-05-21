@@ -48,6 +48,16 @@ module.exports = {
         onDelete: 'cascade',
         onUpdate: 'cascade'
       },
+      promo_id: {
+        type: Sequelize.UUID,
+        defaultValue: null,
+        references: {
+          model: 'promos',
+          key: 'id'
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
+      },
       amount: {
         type: Sequelize.INTEGER,
         allowNull: false

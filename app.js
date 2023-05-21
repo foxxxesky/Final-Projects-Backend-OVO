@@ -8,6 +8,8 @@ const cors = require('cors')
 const authRouter = require('./routes/Auth/auth')
 const walletRouter = require('./routes/Wallet/wallet')
 const transactionRouter = require('./routes/Transaction/transaction')
+const productRouter = require('./routes/Products/product')
+const promoRouter = require('./routes/Promo/promo')
 
 const app = express()
 
@@ -26,6 +28,12 @@ router.use(walletRouter)
 
 // Transaction
 router.use(transactionRouter)
+
+// Product
+router.use(productRouter)
+
+// Promo
+router.use(promoRouter)
 
 app.use('/api', router)
 

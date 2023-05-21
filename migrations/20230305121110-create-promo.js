@@ -2,27 +2,31 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('transaction_methods', {
+    await queryInterface.createTable('promos', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID
       },
-      method_name: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      instruction: {
+      description: {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      category: {
-        type: Sequelize.STRING,
+      discount: {
+        type: Sequelize.DOUBLE,
         allowNull: false
       },
-      status: {
-        type: Sequelize.BOOLEAN,
+      min_order: {
+        type: Sequelize.INTEGER,
         allowNull: false
+      },
+      expired_at: {
+        allowNull: false,
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +39,6 @@ module.exports = {
     })
   },
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('transaction_methods')
+    await queryInterface.dropTable('promos')
   }
 }
