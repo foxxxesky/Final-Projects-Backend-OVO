@@ -311,7 +311,9 @@ exports.payment = async (req, res, next) => {
 }
 
 exports.method = async (req, res) => {
-  const methods = await TransactionMethod.findAll()
+  const methods = await TransactionMethod.findAll({
+    where: { instruction: !null }
+  })
 
   res.status(200).json({
     message: 'Transaction Method List',
