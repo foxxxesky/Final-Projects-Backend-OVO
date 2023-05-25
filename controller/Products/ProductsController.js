@@ -10,28 +10,28 @@ exports.show = async (req, res) => {
   const conditions = {}
 
   if (req.query.category === 'Pulsa/Paket Data') {
-    const provider = decoded.user.phone.substring(0, 4)
+    const provider = decoded.user.phone.substring(0, 5)
     conditions.category = req.query.category
 
-    if (provider === '0821' || provider === '0852' || provider === '0853' || provider === '0811' || provider === '0812' || provider === '0813' || provider === '0822') {
+    if (provider === '62821' || provider === '62852' || provider === '62853' || provider === '62811' || provider === '62812' || provider === '62813' || provider === '62822') {
       // Telkomsel
       conditions.code = 'S'
-    } else if (provider === '0851') {
+    } else if (provider === '62851') {
       // ByU
       conditions.code = 'SB'
-    } else if (provider === '0855' || provider === '0856' || provider === '0857' || provider === '0858' || provider === '0814' || provider === '0815' || provider === '0816') {
+    } else if (provider === '62855' || provider === '62856' || provider === '62857' || provider === '62858' || provider === '62814' || provider === '62815' || provider === '62816') {
       // Indosat
       conditions.code = 'I'
-    } else if (provider === '0817' || provider === '0818' || provider === '0819' || provider === '0859' || provider === '0877' || provider === '0878') {
+    } else if (provider === '62817' || provider === '62818' || provider === '62819' || provider === '62859' || provider === '62877' || provider === '62878') {
       // XL
       conditions.code = 'X'
-    } else if (provider === '0895' || provider === '0896' || provider === '0897' || provider === '0898' || provider === '0899') {
+    } else if (provider === '62895' || provider === '62896' || provider === '62897' || provider === '62898' || provider === '62899') {
       // Three
       conditions.code = 'T'
-    } else if (provider === '0881' || provider === '0882' || provider === '0883' || provider === '0884' || provider === '0885' || provider === '0886' || provider === '0887' || provider === '0888' || provider === '0889') {
+    } else if (provider === '62881' || provider === '62882' || provider === '62883' || provider === '62884' || provider === '62885' || provider === '62886' || provider === '62887' || provider === '62888' || provider === '62889') {
       // Smartfren
       conditions.code = 'SM'
-    } else if (provider === '0832' || provider === '0833' || provider === '0838') {
+    } else if (provider === '62832' || provider === '62833' || provider === '62838') {
       // Axis
       conditions.code = 'AX'
     } else {
