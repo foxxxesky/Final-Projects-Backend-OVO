@@ -26,8 +26,14 @@ exports.show = async (req, res) => {
     conditions.transaction_type = req.query.transaction_type
   }
 
+  const limit = parseInt(req.query.limit) || null
+  const page = parseInt(req.query.page) || 1
+  const offset = (page - 1) * limit
+
   const transaction = await WalletTransaction.findAll({
     where: { user_id: decoded.user.id, ...conditions },
+    limit,
+    offset,
     include: [
       {
         model: User,
@@ -69,7 +75,11 @@ exports.show = async (req, res) => {
 
   res.status(200).json({
     message: 'Transaction List',
-    data: transaction
+    data: transaction,
+    meta: {
+      limit,
+      page
+    }
   })
 }
 
