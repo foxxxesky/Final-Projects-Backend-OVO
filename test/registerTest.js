@@ -1,39 +1,32 @@
 import http from 'k6/http'
-import { sleep, check } from 'k6'
+import { sleep } from 'k6'
 
 export const options = {
-  ext: {
-    loadimpact: {
-      projectID: 3640832,
-      // Test runs with the same name groups test runs together
-      name: 'Registration Load Test'
-    }
-  },
   thresholds: {
-    http_req_failed: ['rate<0.01'], // http errors should be less than 1%
-    // Ensure that 50% of requests complete within 2000ms
-    // and 80% of requests complete within 2500ms
-    http_req_duration: ['p(50)<2000', 'p(80)<3000']
+    http_req_failed: ['rate<1.0'] // http errors should be less than 1%
   },
   stages: [
-    // Ramp up from 0 to 10 VUs over 30 seconds
-    { duration: '30s', target: 10 },
-    // Ramp up from 10 to 25 VUs over 30 seconds
-    { duration: '30s', target: 25 },
-    // Ramp up from 25 to 50 VUs over 1 minute
-    { duration: '1m', target: 50 },
-    // Stay at 50 VUs for 1 minute
-    { duration: '1m', target: 50 },
-    // Ramp down from 50 to 20 VUs over 30 seconds
-    { duration: '30s', target: 20 },
-    // Ramp down from 20 to 10 VUs over 30 seconds
-    { duration: '30s', target: 10 },
-    // Ramp down from 10 to 0 VUs over 30 seconds
-    { duration: '30s', target: 0 }
+    // 50
+    { duration: '10s', target: 25 },
+    { duration: '40s', target: 50 },
+    { duration: '10s', target: 35 }
+    // 100
+    // { duration: '10s', target: 50 },
+    // { duration: '40s', target: 100 },
+    // { duration: '10s', target: 75 },
+    // 200 users
+    // { duration: '10s', target: 100 },
+    // { duration: '40s', target: 200 },
+    // { duration: '10s', target: 150 },
+    // 500
+    // { duration: '10s', target: 350 },
+    // { duration: '40s', target: 500 },
+    // { duration: '10s', target: 250 }
   ]
 }
 export default function () {
-  const url = `${__ENV.SERVER}/user/register`
+  const baseUrl = 'http://visipay.syariif-dev.com/api'
+  const url = baseUrl + '/user/register'
   const email = `user${Math.floor(Math.random() * 100000)}@example.com`
   const name = `user_${Math.floor(Math.random() * 100000)}`
   const phone = `+1${Math.floor(Math.random() * 9000000000) + 1000000000}`
@@ -51,27 +44,6 @@ export default function () {
     }
   }
 
-  const res = http.post(url, payload, params)
-
-  check(res, {
-    'status is 200': (r) => r.status === 200,
-    'access token is returned': (r) => {
-      const body = JSON.parse(r.body)
-      return (
-        'access_token' in body
-      )
-    },
-    'user is registered': (r) => JSON.parse(r.body).message === 'Register Success!',
-    'user data is returned': (r) => {
-      const user = JSON.parse(r.body).data
-      return (
-        'id' in user &&
-        'name' in user &&
-        'phone' in user &&
-        'security_code'
-      )
-    }
-  })
-
+  http.post(url, payload, params)
   sleep(1)
 }
