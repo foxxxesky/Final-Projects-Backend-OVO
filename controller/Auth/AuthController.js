@@ -71,25 +71,29 @@ exports.otp = async (req, res) => {
 
   let twilio
 
-  await client.verify.v2.services(verifyService).verifications.create({
-    to: '+' + identifier,
-    channel: otpChannel
-  })
-    .then(async (verivication) => {
-      twilio = verivication
+  try {
+    await client.verify.v2.services(verifyService).verifications.create({
+      to: '+' + identifier,
+      channel: otpChannel
     })
-    .catch((error) => {
-      twilio = error
-    })
+      .then(async (verivication) => {
+        twilio = verivication
+      })
+      .catch((error) => {
+        twilio = error
+      })
 
-  if (twilio.status === 400 || twilio.status === 404) {
-    return res.status(400).json({ message: twilio })
+    if (twilio.status === 400 || twilio.status === 404) {
+      return res.status(400).json({ message: twilio })
+    }
+
+    res.status(200).json({
+      message: 'OTP sent successfuly!',
+      data: twilio
+    })
+  } catch (error) {
+    return res.status(400).json({ message: 'an error occurred!' })
   }
-
-  res.status(200).json({
-    message: 'OTP sent successfuly!',
-    data: twilio
-  })
 }
 
 exports.verifyOtp = async (req, res) => {
@@ -97,32 +101,36 @@ exports.verifyOtp = async (req, res) => {
 
   let twilio
 
-  await client.verify.v2.services(verifyService).verificationChecks.create({
-    to: '+' + identifier,
-    code: otp
-  })
-    .then(async (verification) => {
-      twilio = verification
+  try {
+    await client.verify.v2.services(verifyService).verificationChecks.create({
+      to: '+' + identifier,
+      code: otp
     })
-    .catch((error) => {
-      twilio = error
+      .then(async (verification) => {
+        twilio = verification
+      })
+      .catch((error) => {
+        twilio = error
+      })
+
+    if (twilio.status === 400 || twilio.status === 404) {
+      return res.status(400).json({ message: twilio })
+    }
+
+    const user = await User.findOne({
+      where: { phone: identifier }
     })
 
-  if (twilio.status === 400 || twilio.status === 404) {
-    return res.status(400).json({ message: twilio })
+    await user.update({ phone_verified: true })
+
+    res.status(200).json({
+      message: 'Verification success!',
+      user,
+      data: twilio
+    })
+  } catch (error) {
+    return res.status(400).json({ message: 'an error occurred!' })
   }
-
-  const user = await User.findOne({
-    where: { phone: identifier }
-  })
-
-  await user.update({ phone_verified: true })
-
-  res.status(200).json({
-    message: 'Verification success!',
-    user,
-    data: twilio
-  })
 }
 
 exports.login = async (req, res) => {
