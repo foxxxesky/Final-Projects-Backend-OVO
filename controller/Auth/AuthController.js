@@ -57,20 +57,8 @@ exports.register = async (req, res) => {
 
     const user = await User.create(req.body)
 
-    const session = {
-      id: req.body.id,
-      name,
-      email,
-      phone
-    }
-
-    const accessToken = jwt.sign({
-      user: session
-    }, ACCESS_TOKEN, { expiresIn: '48h' })
-
     res.status(200).json({
       message: 'Register Success!',
-      access_token: accessToken,
       data: user
     })
   } catch (error) {
