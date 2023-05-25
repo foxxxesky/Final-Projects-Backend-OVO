@@ -26,11 +26,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      email_verified: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-        allowNull: false
-      },
       phone_verified: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

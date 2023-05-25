@@ -1,7 +1,12 @@
 const Validator = require('fastest-validator')
+const accountSid = process.env.TWILIO_ACCOUNT_SID
+const authToken = process.env.TWILIO_AUTH_TOKEN
+const client = require('twilio')(accountSid, authToken)
+const verifyService = process.env.VERIFY_SERVICE
 const { User } = require('../../models')
 const { ACCESS_TOKEN } = process.env
 const jwt = require('jsonwebtoken')
+const { Op } = require('sequelize')
 const bcrypt = require('bcrypt')
 const uuid = require('uuid')
 const v = new Validator()
@@ -38,7 +43,7 @@ exports.register = async (req, res) => {
   }
 
   const validate = v.validate(req.body, schema)
-  const { name, email, phone, security_code: securityCode } = req.body
+  const { security_code: securityCode } = req.body
 
   if (validate.length) {
     return res.status(400).json(validate)
@@ -52,24 +57,79 @@ exports.register = async (req, res) => {
 
     const user = await User.create(req.body)
 
-    const session = {
-      id: req.body.id,
-      name,
-      email,
-      phone
-    }
-
-    const accessToken = jwt.sign({
-      user: session
-    }, ACCESS_TOKEN, { expiresIn: '48h' })
-
     res.status(200).json({
       message: 'Register Success!',
-      access_token: accessToken,
       data: user
     })
   } catch (error) {
     res.status(400).json({ message: 'Email or Phone Already Registered!' })
+  }
+}
+
+exports.otp = async (req, res) => {
+  const { identifier, otpChannel } = req.body
+
+  let twilio
+
+  try {
+    await client.verify.v2.services(verifyService).verifications.create({
+      to: '+' + identifier,
+      channel: otpChannel
+    })
+      .then(async (verivication) => {
+        twilio = verivication
+      })
+      .catch((error) => {
+        twilio = error
+      })
+
+    if (twilio.status === 400 || twilio.status === 404) {
+      return res.status(400).json({ message: twilio })
+    }
+
+    res.status(200).json({
+      message: 'OTP sent successfuly!',
+      data: twilio
+    })
+  } catch (error) {
+    return res.status(400).json({ message: 'an error occurred!' })
+  }
+}
+
+exports.verifyOtp = async (req, res) => {
+  const { identifier, otp } = req.body
+
+  let twilio
+
+  try {
+    await client.verify.v2.services(verifyService).verificationChecks.create({
+      to: '+' + identifier,
+      code: otp
+    })
+      .then(async (verification) => {
+        twilio = verification
+      })
+      .catch((error) => {
+        twilio = error
+      })
+
+    if (twilio.status === 400 || twilio.status === 404) {
+      return res.status(400).json({ message: twilio })
+    }
+
+    const user = await User.findOne({
+      where: { phone: identifier }
+    })
+
+    await user.update({ phone_verified: true })
+
+    res.status(200).json({
+      message: 'Verification success!',
+      user,
+      data: twilio
+    })
+  } catch (error) {
+    return res.status(400).json({ message: 'an error occurred!' })
   }
 }
 
@@ -86,7 +146,14 @@ exports.login = async (req, res) => {
   }
 
   try {
-    const user = await User.findOne({ where: { phone: req.body.phone } })
+    const user = await User.findOne({
+      where: {
+        [Op.and]: [
+          { phone: req.body.phone },
+          { phone_verified: true }
+        ]
+      }
+    })
 
     const checkPass = bcrypt.compareSync(String(req.body.security_code), user.security_code)
 
