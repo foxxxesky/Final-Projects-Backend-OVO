@@ -1,4 +1,8 @@
 const Validator = require('fastest-validator')
+const accountSid = process.env.TWILIO_ACCOUNT_SID
+const authToken = process.env.TWILIO_AUTH_TOKEN
+const verifyService = process.env.VERIFY_SERVICE
+const client = require('twilio')(accountSid, authToken)
 const { User } = require('../../models')
 const { ACCESS_TOKEN } = process.env
 const jwt = require('jsonwebtoken')
@@ -72,6 +76,35 @@ exports.register = async (req, res) => {
     res.status(400).json({ message: 'Email or Phone Already Registered!' })
   }
 }
+
+// otp
+exports.otp = async (req, res) => {
+  const { identifier, otpChannel } = req.body
+
+  let twilio
+
+  await client.verify.v2.services(verifyService).verifications.create({
+    to: '+' + identifier,
+    channel: otpChannel
+  })
+    .then(async (verivication) => {
+      twilio = verivication
+    })
+    .catch((error) => {
+      twilio = error
+    })
+
+  if (twilio.status === 400) {
+    return res.status(400).json({ message: twilio })
+  }
+
+  res.status(200).json({
+    message: 'OTP sent successfuly!',
+    data: twilio
+  })
+}
+
+// resend otp
 
 exports.login = async (req, res) => {
   const schema = {
