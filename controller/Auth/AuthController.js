@@ -125,8 +125,15 @@ exports.verifyOtp = async (req, res) => {
     return res.status(400).json({ message: twilio })
   }
 
+  const user = await User.findOne({
+    where: { phone: identifier }
+  })
+
+  await user.update({ phone_verified: true })
+
   res.status(200).json({
     message: 'Verification success!',
+    user,
     data: twilio
   })
 }
