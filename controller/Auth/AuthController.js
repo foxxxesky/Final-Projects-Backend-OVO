@@ -1,11 +1,12 @@
 const Validator = require('fastest-validator')
 const accountSid = process.env.TWILIO_ACCOUNT_SID
 const authToken = process.env.TWILIO_AUTH_TOKEN
-const verifyService = process.env.VERIFY_SERVICE
 const client = require('twilio')(accountSid, authToken)
+const verifyService = process.env.VERIFY_SERVICE
 const { User } = require('../../models')
 const { ACCESS_TOKEN } = process.env
 const jwt = require('jsonwebtoken')
+const { Op } = require('sequelize')
 const bcrypt = require('bcrypt')
 const uuid = require('uuid')
 const v = new Validator()
@@ -77,7 +78,6 @@ exports.register = async (req, res) => {
   }
 }
 
-// otp
 exports.otp = async (req, res) => {
   const { identifier, otpChannel } = req.body
 
@@ -104,7 +104,6 @@ exports.otp = async (req, res) => {
   })
 }
 
-// verify otp
 exports.verifyOtp = async (req, res) => {
   const { identifier, otp } = req.body
 
@@ -151,7 +150,14 @@ exports.login = async (req, res) => {
   }
 
   try {
-    const user = await User.findOne({ where: { phone: req.body.phone } })
+    const user = await User.findOne({
+      where: {
+        [Op.and]: [
+          { phone: req.body.phone },
+          { phone_verified: true }
+        ]
+      }
+    })
 
     const checkPass = bcrypt.compareSync(String(req.body.security_code), user.security_code)
 
