@@ -94,7 +94,7 @@ exports.otp = async (req, res) => {
       twilio = error
     })
 
-  if (twilio.status === 400) {
+  if (twilio.status === 400 || twilio.status === 404) {
     return res.status(400).json({ message: twilio })
   }
 
@@ -104,7 +104,32 @@ exports.otp = async (req, res) => {
   })
 }
 
-// resend otp
+// verify otp
+exports.verifyOtp = async (req, res) => {
+  const { identifier, otp } = req.body
+
+  let twilio
+
+  await client.verify.v2.services(verifyService).verificationChecks.create({
+    to: '+' + identifier,
+    code: otp
+  })
+    .then(async (verification) => {
+      twilio = verification
+    })
+    .catch((error) => {
+      twilio = error
+    })
+
+  if (twilio.status === 400 || twilio.status === 404) {
+    return res.status(400).json({ message: twilio })
+  }
+
+  res.status(200).json({
+    message: 'Verification success!',
+    data: twilio
+  })
+}
 
 exports.login = async (req, res) => {
   const schema = {
