@@ -1,5 +1,6 @@
 import http from 'k6/http'
 import { sleep } from 'k6'
+// import { htmlReport } from 'https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js'
 
 export const options = {
   thresholds: {
@@ -24,6 +25,13 @@ export const options = {
     // { duration: '10s', target: 250 }
   ]
 }
+
+// export function handleSummary (data) {
+//   return {
+//     charge_test: htmlReport(data)
+//   }
+// }
+
 export default function () {
   const baseUrl = 'http://visipay.syariif-dev.com/api'
   const url = baseUrl + '/user/register'
