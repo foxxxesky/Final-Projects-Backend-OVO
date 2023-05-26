@@ -4,7 +4,7 @@ import { sleep } from 'k6'
 
 export const options = {
   thresholds: {
-    http_req_failed: ['rate<1.0'] // http errors should be less than 1%
+    http_req_failed: ['rate<0.2'] // http errors should be less than 1%
   },
   stages: [
     // 50
@@ -13,20 +13,20 @@ export const options = {
     // { duration: '20s', target: 50 },
     // { duration: '10s', target: 35 }
     // 100
-    { duration: '10s', target: 50 },
-    { duration: '20s', target: 100 },
-    { duration: '20s', target: 100 },
-    { duration: '10s', target: 75 }
+    // { duration: '10s', target: 50 },
+    // { duration: '20s', target: 100 },
+    // { duration: '20s', target: 100 },
+    // { duration: '10s', target: 75 }
     // 200 users
     // { duration: '10s', target: 100 },
     // { duration: '20s', target: 200 },
     // { duration: '20s', target: 200 },
     // { duration: '10s', target: 150 }
     // 500
-    // { duration: '10s', target: 350 },
-    // { duration: '20s', target: 500 },
-    // { duration: '20s', target: 500 },
-    // { duration: '10s', target: 250 }
+    { duration: '10s', target: 300 },
+    { duration: '20s', target: 400 },
+    { duration: '20s', target: 400 },
+    { duration: '10s', target: 350 }
   ]
 }
 

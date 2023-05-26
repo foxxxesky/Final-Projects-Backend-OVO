@@ -4,7 +4,7 @@ import { sleep } from 'k6'
 
 export const options = {
   thresholds: {
-    http_req_failed: ['rate<0.2'] // http errors should be less than 1%
+    http_req_failed: ['rate<0.2'] // http errors should be less than 20%
   },
   stages: [
     // 50
