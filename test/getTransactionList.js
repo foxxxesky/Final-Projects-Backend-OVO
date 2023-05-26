@@ -8,20 +8,24 @@ export const options = {
   },
   stages: [
     // 50
-    { duration: '10s', target: 25 },
-    { duration: '40s', target: 50 },
-    { duration: '10s', target: 35 }
+    // { duration: '10s', target: 25 },
+    // { duration: '20s', target: 50 },
+    // { duration: '20s', target: 50 },
+    // { duration: '10s', target: 35 }
     // 100
-    // { duration: '10s', target: 50 },
-    // { duration: '40s', target: 100 },
-    // { duration: '10s', target: 75 }
+    { duration: '10s', target: 50 },
+    { duration: '20s', target: 100 },
+    { duration: '20s', target: 100 },
+    { duration: '10s', target: 75 }
     // 200 users
     // { duration: '10s', target: 100 },
-    // { duration: '40s', target: 200 },
-    // { duration: '10s', target: 150 },
+    // { duration: '20s', target: 200 },
+    // { duration: '20s', target: 200 },
+    // { duration: '10s', target: 150 }
     // 500
     // { duration: '10s', target: 350 },
-    // { duration: '40s', target: 500 },
+    // { duration: '20s', target: 500 },
+    // { duration: '20s', target: 500 },
     // { duration: '10s', target: 250 }
   ]
 }
