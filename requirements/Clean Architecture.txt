@@ -1,24 +1,18 @@
      
-        ======= Presentation Layer ========
-        routes/                 <-- handling incoming request
-            L Auth/             <-- auth routes
-            L Transaction/      <-- auth routes
-            L Wallet/           <-- wallet routes
-        ======= Application Layer =========
-        controller/             <-- contains business logic of application
-            L Auth/             <-- auth logic
-            L Transaction/      <-- transaction logic
-            L Wallet/           <-- wallet logic
-        middleware/
-        ======= Domain Layer ==============
-        models/                 <-- contains core business logic of application
-        ====== Data Layer =================
-        config/                 <-- handles data presistence
-        migrations/             <-- application migration
-        seeders/                <-- application seeders
-        ====== Infrastructure Layer ======
-        bin/                    <-- express script
-        .env                    <-- application environment
-        app.js                  <-- express server
-        package.json            <-- application package
+      |  ======= Presentation Layer ========
+      |  routes/                 <-- handling incoming request
+      V  ======= Application Layer =========
+      |  controller/             <-- contains business logic of application
+      |  middleware/             <-- contains business logic of application
+      V  ======= Domain Layer ==============
+      |  models/                 <-- contains core business logic of application
+      |  ====== Data Layer =================
+      |  config/                 <-- handles data presistence
+      |  migrations/             <-- application migration
+      |  seeders/                <-- application seeders
+      V  ====== Infrastructure Layer ======
+      |  bin/                    <-- express script
+      |  .env                    <-- application environment
+      |  app.js                  <-- express server
+      V  package.json            <-- application package
 
