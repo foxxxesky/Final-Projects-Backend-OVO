@@ -18,7 +18,7 @@ exports.show = async (req, res) => {
       {
         model: User,
         attributes: {
-          exclude: ['security_code', 'email_verified', 'phone_verified', 'createdAt', 'updatedAt']
+          exclude: ['security_code', 'phone_verified', 'createdAt', 'updatedAt']
         },
         as: 'user_wallet'
       }
@@ -55,7 +55,7 @@ exports.create = async (req, res) => {
         {
           model: User,
           attributes: {
-            exclude: ['security_code', 'email_verified', 'phone_verified', 'createdAt', 'updatedAt']
+            exclude: ['security_code', 'phone_verified', 'createdAt', 'updatedAt']
           },
           as: 'user_wallet'
         }
