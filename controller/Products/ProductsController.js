@@ -40,10 +40,10 @@ exports.show = async (req, res) => {
   }
 
   if (req.query.category === 'PLN') {
-    if (!req.body.id_pelanggan) {
+    if (!req.query.id_pelanggan) {
       return res.status(400).json({ message: 'ID pelanggan tidak ditemukan!' })
     }
-    const billType = req.body.id_pelanggan.substring(0, 4)
+    const billType = req.query.id_pelanggan.substring(0, 4)
     conditions.category = req.query.category
 
     if (billType === '0001') {
@@ -54,11 +54,11 @@ exports.show = async (req, res) => {
   }
 
   if (req.query.category === 'PDAM') {
-    if (!req.body.id_pelanggan) {
+    if (!req.query.id_pelanggan) {
       return res.status(400).json({ message: 'ID pelanggan tidak ditemukan!' })
     }
 
-    const billType = req.body.id_pelanggan.substring(0, 4)
+    const billType = req.query.id_pelanggan.substring(0, 4)
     conditions.category = req.query.category
 
     if (billType === '0002') {
