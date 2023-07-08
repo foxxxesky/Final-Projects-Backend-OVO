@@ -81,10 +81,12 @@ exports.create = async (req, res) => {
 }
 
 exports.update = async (req, res) => {
-  const id = req.query.id
+  const authHeader = req.headers.authorization
+  const token = authHeader && authHeader.split(' ')[1]
+  const decoded = jwt.verify(token, process.env.ACCESS_TOKEN)
 
   const wallet = await Wallet.findOne({
-    where: { id },
+    where: { user_id: decoded.user.id },
     attributes: {
       exclude: ['createdAt']
     }
@@ -96,7 +98,6 @@ exports.update = async (req, res) => {
 
   try {
     const schema = {
-      user_id: 'uuid',
       balance: 'number'
     }
 
@@ -107,11 +108,11 @@ exports.update = async (req, res) => {
     }
 
     await wallet.update(req.body)
-    res.status(200).json({
+    return res.status(200).json({
       message: 'Wallet updated!',
       data: wallet
     })
   } catch (error) {
-    res.status(400).json(error)
+    return res.status(400).json(error)
   }
 }

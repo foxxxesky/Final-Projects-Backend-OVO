@@ -69,6 +69,14 @@ exports.register = async (req, res) => {
 exports.otp = async (req, res) => {
   const { identifier, otpChannel } = req.body
 
+  const user = await User.findOne({
+    where: { phone: identifier, phone_verified: false }
+  })
+
+  if (!user) {
+    return res.status(400).json({ message: 'User Already Verified!' })
+  }
+
   let twilio
 
   try {
@@ -170,7 +178,7 @@ exports.login = async (req, res) => {
 
     const accessToken = jwt.sign({
       user: session
-    }, ACCESS_TOKEN, { expiresIn: '48h' })
+    }, ACCESS_TOKEN, { expiresIn: '72h' }) // set expiration date is 3 days
 
     res.status(200).json({
       message: 'Login Success!',
@@ -257,7 +265,7 @@ exports.edit = async (req, res) => {
 
       const accessToken = jwt.sign({
         user: session
-      }, ACCESS_TOKEN, { expiresIn: '48h' })
+      }, ACCESS_TOKEN, { expiresIn: '72h' })
 
       res.status(200).json({
         message: 'User profile updated!',

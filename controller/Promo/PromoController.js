@@ -1,7 +1,16 @@
+const { Op } = require('sequelize')
 const { Promo } = require('../../models')
 
 exports.show = async (req, res) => {
-  const promo = await Promo.findAll()
+  const currentDate = new Date()
+
+  const promo = await Promo.findAll({
+    where: {
+      expired_at: {
+        [Op.gte]: currentDate
+      }
+    }
+  })
 
   res.status(200).json({
     message: 'Promo List',
