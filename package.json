@@ -6,6 +6,7 @@
     "dev": "nodemon ./bin/www",
     "migrate": "npx sequelize db:migrate",
     "seed": "npx sequelize db:seed:all",
+    "promo-seed": "npx sequelize db:seed --seed 20230520044957-promo.js",
     "undo": "npx sequelize db:migrate:undo:all"
   },
   "dependencies": {

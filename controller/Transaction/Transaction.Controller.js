@@ -18,6 +18,10 @@ exports.show = async (req, res) => {
   const decoded = jwt.verify(token, process.env.ACCESS_TOKEN)
 
   const conditions = {}
+  if (req.query.transaction_id) {
+    conditions.id = req.query.transaction_id
+  }
+
   if (req.query.transaction_status) {
     conditions.transaction_status = req.query.transaction_status
   }
@@ -26,7 +30,7 @@ exports.show = async (req, res) => {
     conditions.transaction_type = req.query.transaction_type
   }
 
-  const limit = parseInt(req.query.limit) || null
+  const limit = parseInt(req.query.limit) || 25
   const page = parseInt(req.query.page) || 1
   const offset = (page - 1) * limit
 
