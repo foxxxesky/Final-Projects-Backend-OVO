@@ -264,20 +264,25 @@ exports.payment = async (req, res, next) => {
     const promo = await Promo.findOne({ where: { id: req.body.promo_id } })
     const method = await TransactionMethod.findOne({ where: { method_name: 'Visipay Wallet' } })
 
+    console.log(promo)
+
     if (!product) {
       return res.status(400).json({ message: 'invalid product id' })
     }
 
-    if (!promo) {
+    if (req.body.promo_id !== null && !promo) {
       return res.status(400).json({ message: 'invalid promo id' })
     }
 
     let discount = 0
-    if (product.price >= promo.min_order) {
-      discount = product.price * promo.discount
-      product.price = product.price - discount
-    } else {
-      req.body.promo_id = null
+
+    if (promo) {
+      if (product.price >= promo.min_order) {
+        discount = product.price * promo.discount
+        product.price = product.price - discount
+      } else {
+        req.body.promo_id = null
+      }
     }
 
     if (currentBalance < product.price) {
