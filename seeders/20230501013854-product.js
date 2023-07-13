@@ -76,7 +76,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'AXIS 5K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'AX',
         price: 5975,
         createdAt: new Date(),
@@ -85,7 +85,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'AXIS 10K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'AX',
         price: 10975,
         createdAt: new Date(),
@@ -94,7 +94,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'AXIS 25K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'AX',
         price: 25050,
         createdAt: new Date(),
@@ -103,7 +103,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'AXIS 50K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'AX',
         price: 49975,
         createdAt: new Date(),
@@ -112,7 +112,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'AXIS 100K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'AX',
         price: 98725,
         createdAt: new Date(),
@@ -121,9 +121,45 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'AXIS 200K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'AX',
         price: 199000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA AXIS 10 GB',
+        category: 'Paket-Data',
+        code: 'AX',
+        price: 20000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA AXIS 25 GB',
+        category: 'Paket-Data',
+        code: 'AX',
+        price: 35000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA AXIS 30 GB',
+        category: 'Paket-Data',
+        code: 'AX',
+        price: 45000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA AXIS 50 GB',
+        category: 'Paket-Data',
+        code: 'AX',
+        price: 75000,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -131,7 +167,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'INDOSAT 5K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'I',
         price: 5795,
         createdAt: new Date(),
@@ -140,7 +176,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'INDOSAT 10K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'I',
         price: 10695,
         createdAt: new Date(),
@@ -149,7 +185,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'INDOSAT 20K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'I',
         price: 19895,
         createdAt: new Date(),
@@ -158,7 +194,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'INDOSAT 25K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'I',
         price: 24775,
         createdAt: new Date(),
@@ -167,7 +203,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'INDOSAT 50K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'I',
         price: 48875,
         createdAt: new Date(),
@@ -176,7 +212,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'INDOSAT 100K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'I',
         price: 97975,
         createdAt: new Date(),
@@ -185,9 +221,45 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'INDOSAT 200K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'I',
         price: 189975,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA INDOSAT 10 GB',
+        category: 'Paket-Data',
+        code: 'I',
+        price: 20000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA INDOSAT 25 GB',
+        category: 'Paket-Data',
+        code: 'I',
+        price: 35000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA INDOSAT 30 GB',
+        category: 'Paket-Data',
+        code: 'I',
+        price: 45000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA INDOSAT 50 GB',
+        category: 'Paket-Data',
+        code: 'I',
+        price: 75000,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -195,7 +267,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'SMARTFREN 5K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'SM',
         price: 5095,
         createdAt: new Date(),
@@ -204,7 +276,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'SMARTFREN 10K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'SM',
         price: 9975,
         createdAt: new Date(),
@@ -213,7 +285,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'SMARTFREN 20K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'SM',
         price: 19800,
         createdAt: new Date(),
@@ -222,7 +294,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'SMARTFREN 25K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'SM',
         price: 24585,
         createdAt: new Date(),
@@ -231,7 +303,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'SMARTFREN 50K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'SM',
         price: 48965,
         createdAt: new Date(),
@@ -240,7 +312,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'SMARTFREN 100K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'SM',
         price: 98900,
         createdAt: new Date(),
@@ -249,9 +321,45 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'SMARTFREN 200K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'SM',
         price: 199575,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA SMARTFREN 10 GB',
+        category: 'Paket-Data',
+        code: 'SM',
+        price: 20000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA SMARTFREN 25 GB',
+        category: 'Paket-Data',
+        code: 'SM',
+        price: 35000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA SMARTFREN 30 GB',
+        category: 'Paket-Data',
+        code: 'SM',
+        price: 45000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA SMARTFREN 50 GB',
+        category: 'Paket-Data',
+        code: 'SM',
+        price: 75000,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -259,7 +367,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TELKOMSEL 5K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'S',
         price: 5395,
         createdAt: new Date(),
@@ -268,7 +376,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TELKOMSEL 10K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'S',
         price: 10395,
         createdAt: new Date(),
@@ -277,7 +385,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TELKOMSEL 20K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'S',
         price: 20095,
         createdAt: new Date(),
@@ -286,7 +394,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TELKOMSEL 25K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'S',
         price: 24995,
         createdAt: new Date(),
@@ -295,7 +403,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TELKOMSEL 50K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'S',
         price: 49975,
         createdAt: new Date(),
@@ -304,7 +412,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TELKOMSEL 100K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'S',
         price: 99375,
         createdAt: new Date(),
@@ -313,9 +421,45 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TELKOMSEL 200K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'S',
         price: 198975,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA TELKOMSEL 10 GB',
+        category: 'Paket-Data',
+        code: 'S',
+        price: 20000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA TELKOMSEL 25 GB',
+        category: 'Paket-Data',
+        code: 'S',
+        price: 35000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA TELKOMSEL 30 GB',
+        category: 'Paket-Data',
+        code: 'S',
+        price: 45000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA TELKOMSEL 50 GB',
+        category: 'Paket-Data',
+        code: 'S',
+        price: 75000,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -323,7 +467,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TELKOMSEL BY.U 5K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'SB',
         price: 5795,
         createdAt: new Date(),
@@ -332,7 +476,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TELKOMSEL BY.U 10K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'SB',
         price: 10595,
         createdAt: new Date(),
@@ -341,7 +485,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TELKOMSEL BY.U 20K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'SB',
         price: 20395,
         createdAt: new Date(),
@@ -350,7 +494,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TELKOMSEL BY.U 25K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'SB',
         price: 25395,
         createdAt: new Date(),
@@ -359,7 +503,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TELKOMSEL BY.U 50K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'SB',
         price: 50395,
         createdAt: new Date(),
@@ -368,9 +512,45 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TELKOMSEL BY.U 100K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'SB',
         price: 100475,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA TELKOMSEL BY.U 10 GB',
+        category: 'Paket-Data',
+        code: 'SB',
+        price: 20000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA TELKOMSEL BY.U 25 GB',
+        category: 'Paket-Data',
+        code: 'SB',
+        price: 35000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA TELKOMSEL BY.U 30 GB',
+        category: 'Paket-Data',
+        code: 'SB',
+        price: 45000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA TELKOMSEL BY.U 50 GB',
+        category: 'Paket-Data',
+        code: 'SB',
+        price: 75000,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -378,7 +558,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TRI 5K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'T',
         price: 5595,
         createdAt: new Date(),
@@ -387,7 +567,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TRI 10K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'T',
         price: 10450,
         createdAt: new Date(),
@@ -396,7 +576,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TRI 20K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'T',
         price: 20009,
         createdAt: new Date(),
@@ -405,7 +585,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TRI 25K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'T',
         price: 24975,
         createdAt: new Date(),
@@ -414,7 +594,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TRI 50K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'T',
         price: 48975,
         createdAt: new Date(),
@@ -423,7 +603,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TRI 100K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'T',
         price: 98975,
         createdAt: new Date(),
@@ -432,9 +612,45 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TRI 200K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'T',
         price: 196187,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA TRI 10 GB',
+        category: 'Paket-Data',
+        code: 'T',
+        price: 20000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA TRI 25 GB',
+        category: 'Paket-Data',
+        code: 'T',
+        price: 35000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA TRI 30 GB',
+        category: 'Paket-Data',
+        code: 'T',
+        price: 45000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA TRI 50 GB',
+        category: 'Paket-Data',
+        code: 'T',
+        price: 75000,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -442,7 +658,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TRI 5K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'X',
         price: 5975,
         createdAt: new Date(),
@@ -451,7 +667,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TRI 10K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'X',
         price: 10975,
         createdAt: new Date(),
@@ -460,7 +676,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TRI 25K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'X',
         price: 25050,
         createdAt: new Date(),
@@ -469,7 +685,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TRI 50K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'X',
         price: 49975,
         createdAt: new Date(),
@@ -478,7 +694,7 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TRI 100K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'X',
         price: 98775,
         createdAt: new Date(),
@@ -487,9 +703,45 @@ module.exports = {
       {
         id: uuid.v4(),
         name: 'TRI 200K',
-        category: 'Pulsa/Paket Data',
+        category: 'Pulsa',
         code: 'X',
         price: 199000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA XL 10 GB',
+        category: 'Paket-Data',
+        code: 'X',
+        price: 20000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA XL 25 GB',
+        category: 'Paket-Data',
+        code: 'X',
+        price: 35000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA XL 30 GB',
+        category: 'Paket-Data',
+        code: 'X',
+        price: 45000,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: uuid.v4(),
+        name: 'PAKET DATA XL 50 GB',
+        category: 'Paket-Data',
+        code: 'X',
+        price: 75000,
         createdAt: new Date(),
         updatedAt: new Date()
       }
