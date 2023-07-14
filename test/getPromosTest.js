@@ -22,7 +22,7 @@ export const options = {
     // { duration: '20s', target: 200 },
     // { duration: '20s', target: 200 },
     // { duration: '10s', target: 150 }
-    // 500
+    // 400
     { duration: '10s', target: 300 },
     { duration: '20s', target: 400 },
     { duration: '20s', target: 400 },
