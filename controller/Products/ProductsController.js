@@ -40,7 +40,7 @@ exports.show = async (req, res) => {
   }
 
   if (req.query.category === 'Paket-Data') {
-    const provider = decoded.user.phone.substring(0, 5)
+    const provider = req.query.phone_number ? req.query.phone_number.substring(0, 5) : decoded.user.phone.substring(0, 5)
     conditions.category = req.query.category
 
     if (provider === '62821' || provider === '62852' || provider === '62853' || provider === '62811' || provider === '62812' || provider === '62813' || provider === '62822') {
