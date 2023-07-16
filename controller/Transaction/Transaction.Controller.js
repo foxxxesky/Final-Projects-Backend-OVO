@@ -74,7 +74,8 @@ exports.show = async (req, res) => {
         },
         as: 'transaction_discount'
       }
-    ]
+    ],
+    order: [['createdAt', 'DESC']]
   })
 
   res.status(200).json({
