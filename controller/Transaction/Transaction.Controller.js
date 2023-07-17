@@ -18,7 +18,7 @@ exports.show = async (req, res) => {
   const decoded = jwt.verify(token, process.env.ACCESS_TOKEN)
 
   const conditions = {}
-  const productConditions = {}
+  // const productConditions = {}
 
   if (req.query.transaction_id) {
     conditions.id = req.query.transaction_id
@@ -32,8 +32,9 @@ exports.show = async (req, res) => {
     conditions.transaction_type = req.query.transaction_type
   }
 
+  let category = ''
   if (req.query.category) {
-    productConditions.category = req.query.category
+    category = req.query.category
   }
 
   const limit = parseInt(req.query.limit) || 25
@@ -72,14 +73,15 @@ exports.show = async (req, res) => {
           exclude: ['createdAt', 'updatedAt']
         },
         as: 'transaction_product',
-        where: { ...productConditions }
+        where: category ? { category } : null
       },
       {
         model: Promo,
         attributes: {
           exclude: ['createdAt', 'updatedAt']
         },
-        as: 'transaction_discount'
+        as: 'transaction_discount',
+        where: null
       }
     ],
     order: [['createdAt', 'DESC']]
