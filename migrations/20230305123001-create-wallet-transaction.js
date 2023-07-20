@@ -30,6 +30,7 @@ module.exports = {
       },
       transaction_method_id: {
         type: Sequelize.UUID,
+        allowNull: false,
         references: {
           model: 'transaction_methods',
           key: 'id'
