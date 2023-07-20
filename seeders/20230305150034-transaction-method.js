@@ -36,7 +36,7 @@ module.exports = {
       {
         id: uuid.v4(),
         method_name: 'BRI',
-        instruction: '1. Masuk ke aplikasi BRImo \n2. Pilih menu Transaksi Lain \n3. Pilih menu Pembayaran \n4. Pilih menu Lainnya \n5. Pilih menu BRIVA \n6. Masukan nomer Virtual Account \n7. Konfirmasi dan masukan Password Transaksi \n7. Ikuti instruksi selanjutnya untuk menyelesaikan transaksi',
+        instruction: '1. Masuk ke aplikasi BRImo \n2. Pilih menu Transaksi Lain \n3. Pilih menu Pembayaran \n4. Pilih menu Lainnya \n5. Pilih menu BRIVA \n6. Masukan nomer Virtual Account \n7. Konfirmasi dan masukan Password Transaksi \n8. Ikuti instruksi selanjutnya untuk menyelesaikan transaksi',
         category: 'Mobile banking',
         status: 1,
         createdAt: new Date(),
