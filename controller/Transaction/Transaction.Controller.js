@@ -18,7 +18,6 @@ exports.show = async (req, res) => {
   const decoded = jwt.verify(token, process.env.ACCESS_TOKEN)
 
   const conditions = {}
-  // const productConditions = {}
 
   if (req.query.transaction_id) {
     conditions.id = req.query.transaction_id
@@ -260,6 +259,7 @@ exports.payment = async (req, res, next) => {
 
   const schema = {
     product_id: 'uuid',
+    billing_number: 'string|optional',
     promo_id: 'uuid|optional'
   }
 
@@ -309,6 +309,7 @@ exports.payment = async (req, res, next) => {
       transaction_method_id: method.id,
       product_id: req.body.product_id || null,
       promo_id: req.body.promo_id || null,
+      billing_number: req.body.billing_number || null,
       amount: product.price,
       notes: req.body.notes || null,
       transaction_type: 'credit',
