@@ -30,7 +30,6 @@ module.exports = {
       },
       transaction_method_id: {
         type: Sequelize.UUID,
-        defaultValue: null,
         references: {
           model: 'transaction_methods',
           key: 'id'
@@ -57,6 +56,10 @@ module.exports = {
         },
         onDelete: 'cascade',
         onUpdate: 'cascade'
+      },
+      billing_number: {
+        type: Sequelize.STRING,
+        defaultValue: null
       },
       amount: {
         type: Sequelize.INTEGER,
